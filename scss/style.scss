@@ -15,6 +15,7 @@ a {
   cursor: pointer;
 }
 
+
 button {
   border: none;
   background: none;
@@ -118,7 +119,9 @@ body {
 }
 
 .container {
-  margin: 0 22px;
+  margin: auto;
+  max-width: 1920px;
+  padding: 0 22px;
 }
 
 //header
@@ -213,25 +216,35 @@ body {
     border-radius: 5px;
     padding: 23px 0 22px;
   }
+}
 
-  &-slider {
-    margin-top: 90px;
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch; /* Для iOS */
-    width: 100%;
-    height: 100%; /* Или нужную вам высоту */
+.main-slider {
+  margin-top: 90px;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  height: 100vh; /* Или нужную вам высоту */
+  overflow-y: hidden; /* Убираем вертикальный скролл */
+}
 
-    img {
-      flex: 0 0 100%;
-      scroll-snap-align: start;
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
-  }
+.main-slider img {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Убираем полосу прокрутки */
+.main-slider::-webkit-scrollbar {
+  display: none;
+}
+.main-slider {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 //advantages
@@ -471,7 +484,7 @@ body {
     li {
       display: flex;
       flex-direction: column;
-      max-width: 48.4%;
+      max-width: 930px;
       width: 100%;
       padding: 22px 16px 30px 16px;
       height: 564px;
@@ -485,11 +498,11 @@ body {
       }
 
       &:first-child {
-        max-width: 24%;
+        max-width: 460px;
       }
 
       &:nth-child(2) {
-        max-width: 24%;
+        max-width: 460px;
       }
     }
   }
@@ -535,6 +548,7 @@ body {
   }
 
   &-info {
+    margin-top: auto;
     padding: 25px 0;
     border-top: 1px solid #f0f0f0;
     border-bottom: 1px solid #f0f0f0;
@@ -559,9 +573,11 @@ body {
   }
 
   &-link {
-    margin-top: auto;
+    margin-top: 25px;
     @include btn;
     padding: 23px 0;
+    position: relative;
+    z-index: 2;
     border-radius: 5px;
   }
 
@@ -595,10 +611,19 @@ body {
   }
 
   &-item {
+    height: 851px;
     max-width: 461px;
     padding: 15px 16px;
     background: $back-color;
     border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  &-item__link {
+    height: 100%;
+    justify-content: space-between;
     display: flex;
     flex-direction: column;
   }
@@ -682,7 +707,7 @@ body {
     height: 73px;
     font-weight: 500;
     font-size: 18px;
-
+    border-radius: 5px;
   }
 
 }
@@ -696,7 +721,7 @@ body {
 
   &-wrapper {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 50px;
     gap: 311px;
   }
@@ -729,6 +754,10 @@ body {
     .projects-pagination {
       display: flex;
       gap: 20px;
+
+      button {
+        cursor: pointer;
+      }
     }
   }
 
@@ -1023,6 +1052,238 @@ body {
   stroke: #000;
 }
 
+//cost
+
+.cost {
+  margin-top: 190px;
+}
+
+.cost .container {
+  background: $accent-color;
+  border-radius: 15px;
+  position: relative;
+  padding: 15px;
+  overflow: hidden;
+}
+
+.cost .container img {
+  position: absolute;
+  height: 100%;
+  top: -20px;
+  right: 0;
+}
+
+.cost-content {
+  position: relative;
+  z-index: 10;
+  background: $second-color;
+  border-radius: 15px;
+  max-width: 854px;
+  width: 100%;
+  padding: 66px 30px;
+}
+
+.cost-title {
+  font-family: "Helvetica Neue", sans-serif;
+  @include title;
+}
+
+.cost-title span {
+  color: $aqua-color;
+}
+
+.cost-desc {
+  line-height: 144%;
+  max-width: 616px;
+  color: $desc-color;
+  margin-top: 37px;
+}
+
+.cost-form {
+  margin-top: 104px;
+}
+
+.cost-form input {
+  @include input;
+}
+
+.form-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cost-info {
+  margin-top: 20px;
+  line-height: 120%;
+  font-size: 14px;
+  max-width: 548px;
+  color: $desc-color;
+}
+
+.cost-info a {
+  text-decoration: underline;
+}
+
+.cost-btn {
+  @include btn;
+  margin-top: 35px;
+  height: 73px;
+  font-weight: 500;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+/* Стили для многошаговой формы */
+.form-step {
+  display: none;
+}
+
+.form-step.active {
+  display: block;
+}
+
+/* Стили для кастомного select */
+.select-wrapper {
+  position: relative;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 33px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+.select-wrapper.active .select-arrow {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.select-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  z-index: 10;
+  margin-top: 5px;
+}
+
+.select-wrapper.active .select-options {
+  display: block;
+}
+
+.option {
+  padding: 15px 20px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background: #f5f5f5;
+}
+
+/* Стили для ошибок */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  display: none;
+}
+
+input:invalid {
+  border-color: red !important;
+}
+
+.coating-select.invalid,
+input.invalid {
+  border-color: red !important;
+}
+
+/* Добавляем стили для ошибок */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  display: none;
+}
+
+input:invalid {
+  border-color: red !important;
+}
+
+/* Дополнительные стили для select */
+.select-wrapper {
+  position: relative;
+  margin-bottom: 8px; /* Добавляем отступ как у других полей */
+}
+
+.coating-select.invalid {
+  border-color: red !important;
+}
+
+/* Стили для многошаговой формы */
+.form-step {
+  display: none;
+}
+
+.form-step.active {
+  display: block;
+}
+
+/* Стили для кастомного select */
+.select-wrapper {
+  position: relative;
+}
+
+.coating-select {
+  padding-right: 50px !important; /* Место для стрелки */
+  cursor: pointer;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 33px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+.select-wrapper.active .select-arrow {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.select-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  z-index: 10;
+  margin-top: 5px;
+}
+
+.select-wrapper.active .select-options {
+  display: block;
+}
+
+.option {
+  padding: 15px 20px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background: #f5f5f5;
+}
+
 //stages
 
 .stages {
@@ -1031,6 +1292,7 @@ body {
   &-wrapper {
     display: flex;
     gap: 340px;
+    margin-bottom: 50px;
     align-items: flex-start;
   }
 
@@ -1170,7 +1432,7 @@ body {
 
 #certificates .slide img {
   width: 100%;
-  height: auto;
+  height: 669px;
   object-fit: cover;
   display: block;
   border-radius: 10px;
@@ -1334,6 +1596,7 @@ body {
     font-weight: 500;
     font-size: 18px;
     text-align: center;
+    border-radius: 5px;
   }
 }
 
@@ -1385,13 +1648,20 @@ body {
   }
 
   &-address__wrapper {
+    padding: 50px 0;
     max-width: 910px;
     width: 100%;
   }
 
+  .footer-content {
+    border-left: 1.5px solid #ececec;
+    padding: 50px 0;
+
+  }
+
   &-border {
     margin-top: 38px;
-    padding: 50px 0;
+    //padding: 50px 0;
     border-top: 1.5px solid #ececec;
     border-bottom: 1.5px solid #ececec;
     display: flex;
@@ -1401,7 +1671,6 @@ body {
     width: 100%;
     padding-right: 123px;
     padding-left: 32px;
-    border-left: 1.5px solid #ececec;
     display: flex;
     justify-content: space-between;
   }
@@ -1444,6 +1713,7 @@ body {
     border-radius: 5px;
     width: 290px;
     margin-top: 45px;
+    border-radius: 5px;
   }
 
   &-desc {
@@ -1506,8 +1776,13 @@ body {
   &-info {
     margin: 50px 0 40px;
     display: flex;
-    flex-direction: column;
-    gap: 25px;
+    justify-content: space-between;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
 
     span {
       font-weight: 400;
@@ -1531,7 +1806,7 @@ body {
   }
 }
 
-@media (max-width: 1920px) {
+@media (max-width: 1919px) {
   .catalog-list {
     grid-template-columns: repeat(3, 1fr);
 

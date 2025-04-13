@@ -1,0 +1,182 @@
+.back {
+  padding-top: 84px;
+}
+.back img {
+  width: 100%;
+}
+
+.philosophy {
+  margin-top: 190px;
+}
+.philosophy-title {
+  font-weight: 500;
+  font-size: clamp(24px, 3.333vw, 64px);
+  line-height: 103%;
+  letter-spacing: -0.02em;
+  max-width: 1404px;
+  width: 100%;
+}
+.philosophy-title span {
+  color: #8db0d6;
+}
+.philosophy-name {
+  letter-spacing: -0.04em;
+  color: #818991;
+  padding: 19px 0;
+  border: 1px solid #818991;
+  border-radius: 36px;
+  text-align: center;
+  width: 161px;
+}
+.philosophy-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 311px;
+  margin-bottom: 50px;
+}
+.philosophy-desc {
+  max-width: 697px;
+  margin: 50px auto 0;
+  font-size: 18px;
+  line-height: 156%;
+  color: #818991;
+}
+.philosophy-images {
+  margin-top: 190px;
+  display: flex;
+  gap: 10px;
+}
+.philosophy-images img {
+  width: 100%;
+}
+
+.edge {
+  margin-top: 190px;
+}
+.edge-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 312px;
+  margin-bottom: 50px;
+}
+.edge-name {
+  letter-spacing: -0.04em;
+  color: #818991;
+  padding: 19px 0;
+  border: 1px solid #818991;
+  border-radius: 36px;
+  text-align: center;
+  width: 161px;
+}
+.edge-title {
+  font-weight: 500;
+  font-size: clamp(24px, 3.333vw, 64px);
+  line-height: 103%;
+  letter-spacing: -0.02em;
+  max-width: 1404px;
+  width: 100%;
+}
+.edge-title span {
+  color: #8db0d6;
+}
+.edge-list {
+  margin-top: 50px;
+  display: flex;
+  gap: 10px;
+}
+.edge-list li {
+  border-radius: 15px;
+  width: 24%;
+  padding: 22px 23px 25px 24px;
+  background: #f7f7f7;
+  height: 461px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.edge-num {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 117%;
+  color: #0139b0;
+}
+.edge-subtitle {
+  font-size: 36px;
+  line-height: 98%;
+  margin-top: 32px;
+}
+.edge-desc {
+  font-size: 16px;
+  line-height: 131%;
+  color: #818991;
+  margin-top: auto;
+}
+
+.numbers {
+  margin-top: 190px;
+}
+.numbers-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 312px;
+  margin-bottom: 50px;
+}
+.numbers-name {
+  letter-spacing: -0.04em;
+  color: #818991;
+  padding: 19px 0;
+  border: 1px solid #818991;
+  border-radius: 36px;
+  text-align: center;
+  width: 161px;
+}
+.numbers-title {
+  font-weight: 500;
+  font-size: clamp(24px, 3.333vw, 64px);
+  line-height: 103%;
+  letter-spacing: -0.02em;
+  max-width: 1404px;
+  width: 100%;
+}
+.numbers-title span {
+  color: #8db0d6;
+}
+.numbers-list {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+  justify-content: center;
+  align-items: center;
+}
+.numbers-list li {
+  border-bottom: 1px solid #818991;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 25px;
+  gap: 55px;
+}
+.numbers-list li span:first-child {
+  font-size: 80px;
+  line-height: 90%;
+  letter-spacing: -0.06em;
+  color: #0d3896;
+  width: 180px;
+  text-align: left;
+  flex-shrink: 0;
+}
+.numbers-list li span:nth-child(2) {
+  font-size: 18px;
+  line-height: 117%;
+  color: #818991;
+  width: 400px;
+}
+.numbers-video {
+  width: 100%;
+  margin-top: 100px;
+  border-radius: 15px;
+}
+
+/*# sourceMappingURL=about.css.map */

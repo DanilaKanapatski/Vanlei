@@ -1,0 +1,145 @@
+$accent-color: #0139b0;
+$main-color: #1e2d3d;
+$second-color: #fff;
+$desc-color: #818991;
+$aqua-color: #8db0d6;
+$back-color: #f7f7f7;
+
+@mixin flex-default {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin input {
+  width: 100%;
+  border: none;
+  display: block;
+  border-radius: 5px;
+  background: #ebebeb;
+  font-size: 18px;
+  line-height: 133%;
+  padding: 30px 20px;
+  color: $desc-color;
+}
+
+@mixin section-name {
+  letter-spacing: -0.04em;
+  color: $desc-color;
+  padding: 19px 0;
+  border: 1px solid $desc-color;
+  border-radius: 36px;
+  text-align: center;
+}
+
+@mixin title {
+  font-weight: 500;
+  font-size: clamp(24px, 3.333vw, 64px);
+  line-height: 103%;
+  letter-spacing: -0.02em;
+}
+
+@mixin btn {
+  background: $accent-color;
+  color: $second-color;
+  text-align: center;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+
+.item {
+  padding-top: 113px;
+
+  img {
+    width: 100%;
+  }
+
+  &-title {
+    @include title;
+    font-family: "Helvetica Neue", sans-serif;
+  }
+
+  &-desc {
+    margin-top: 145px;
+    line-height: 127%;
+    color: $desc-color;
+  }
+
+  &-btn {
+    @include btn;
+  }
+
+}
+
+.instructions {
+  margin-top: 48px;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+
+  li {
+    padding: 22px 24px 25px 24px;
+    height: 477px;
+    border-radius: 15px;
+    width: 24.4%;
+    background: $back-color;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  &-title {
+    font-size: 36px;
+    line-height: 98%;
+    margin-top: 32px;
+  }
+
+  &-desc {
+    line-height: 131%;
+    color: $desc-color;
+    margin-top: auto;
+  }
+
+  &-num {
+    font-size: 18px;
+    line-height: 117%;
+    color: #0139b0;
+    font-family: "Kaushan Script", cursive;
+  }
+}
+
+.properties {
+  display: flex;
+  margin-top: 63px;
+  flex-direction: column;
+  gap: 20px;
+
+  &-desc {
+    color: $desc-color;
+  }
+
+  li {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  &-num {
+    font-size: 12px;
+    color: #0139b0;
+    font-family: "Kaushan Script", cursive;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background: $back-color;
+  }
+
+}
+
+.application {
+  margin-top: 63px;
+}

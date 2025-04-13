@@ -7,46 +7,91 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalSlidesEl = document.querySelector('#certificates .total-slides');
 
     let currentIndex = 0;
-    const totalSlides = slides.length;
-    const slidesToShow = 4; // Показываем 4 слайда
-    let slideWidth = slides[0].offsetWidth + 10; // Ширина слайда + gap 10px
+    const totalSlides = slides.length; // 8
+    const slidesToShow = 4;
+    const totalSteps = totalSlides - slidesToShow + 1; // 5 переходов (8-4+1)
+    let slideWidth = slides[0].offsetWidth + 10;
+    let autoplayInterval;
+    const autoplayDelay = 5000;
 
     // Инициализация
     function initSlider() {
-        // Устанавливаем общее количество слайдов
-        totalSlidesEl.textContent = `/${totalSlides < 10 ? '0' + totalSlides : totalSlides}`;
-
-        // Показываем первые слайды
+        totalSlidesEl.textContent = `/${totalSteps < 10 ? '0' + totalSteps : totalSteps}`;
         updateSlider();
+        startAutoplay();
+    }
+
+    // Автопрокрутка
+    function startAutoplay() {
+        stopAutoplay();
+        autoplayInterval = setInterval(() => {
+            if (currentIndex < totalSteps - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            updateSlider();
+        }, autoplayDelay);
+    }
+
+    function stopAutoplay() {
+        if (autoplayInterval) clearInterval(autoplayInterval);
     }
 
     // Обновление слайдера
     function updateSlider() {
-        // Перемещаем контейнер
+        sliderContainer.style.transition = 'transform 0.5s ease';
         sliderContainer.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
 
         // Обновляем счетчик
         currentSlideEl.textContent = currentIndex + 1 < 10 ? `0${currentIndex + 1}` : currentIndex + 1;
 
-        // Блокируем кнопки в крайних положениях
-        prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex >= totalSlides - slidesToShow;
+        // Никогда не блокируем кнопки полностью
+        prevBtn.disabled = false;
+        nextBtn.disabled = false;
+
+        // Визуально выделяем, если достигнут конец/начало
+        if (currentIndex === 0) {
+            prevBtn.classList.add('end-reached');
+        } else {
+            prevBtn.classList.remove('end-reached');
+        }
+
+        if (currentIndex >= totalSteps - 1) {
+            nextBtn.classList.add('end-reached');
+        } else {
+            nextBtn.classList.remove('end-reached');
+        }
     }
 
-    // Кнопки навигации
+    // Кнопка "Вперед"
     nextBtn.addEventListener('click', () => {
-        if (currentIndex < totalSlides - slidesToShow) {
+        stopAutoplay();
+        if (currentIndex < totalSteps - 1) {
             currentIndex++;
-            updateSlider();
+        } else {
+            currentIndex = 0;
         }
+        updateSlider();
+        startAutoplay();
     });
 
+    // Кнопка "Назад"
     prevBtn.addEventListener('click', () => {
+        stopAutoplay();
         if (currentIndex > 0) {
             currentIndex--;
-            updateSlider();
+        } else {
+            currentIndex = totalSteps - 1;
         }
+        updateSlider();
+        startAutoplay();
     });
+
+    // Остановка при наведении
+    const slider = document.querySelector('#certificates .certificates-slider');
+    slider.addEventListener('mouseenter', stopAutoplay);
+    slider.addEventListener('mouseleave', startAutoplay);
 
     // Ресайз
     window.addEventListener('resize', () => {
@@ -54,6 +99,5 @@ document.addEventListener('DOMContentLoaded', () => {
         updateSlider();
     });
 
-    // Инициализируем слайдер
     initSlider();
 });
