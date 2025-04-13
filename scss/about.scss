@@ -64,10 +64,12 @@ $back-color: #f7f7f7;
 
   &-title {
     @include title;
+    font-family: "Helvetica Neue", sans-serif;
     max-width: 1404px;
     width: 100%;
 
     span {
+      font-weight: 500;
       color: $aqua-color;
     }
   }
@@ -86,7 +88,8 @@ $back-color: #f7f7f7;
 
   &-desc {
     max-width: 697px;
-    margin: 50px auto 0;
+    margin-top: 50px;
+    margin-left: 472px;
     font-size: 18px;
     line-height: 156%;
     color: $desc-color;
@@ -121,11 +124,13 @@ $back-color: #f7f7f7;
   }
 
   &-title {
+    font-family: "Helvetica Neue", sans-serif;
     @include title;
     max-width: 1404px;
     width: 100%;
 
     span {
+      font-weight: 500;
       color: $aqua-color;
     }
   }
@@ -144,6 +149,23 @@ $back-color: #f7f7f7;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+
+      &:hover {
+        background: #0d3896;
+
+        .edge-num {
+          color: $second-color;
+        }
+
+        .edge-desc {
+          color: $second-color;
+        }
+
+        .edge-subtitle {
+          color: $second-color;
+        }
+
+      }
     }
   }
 
@@ -158,6 +180,7 @@ $back-color: #f7f7f7;
     font-size: 36px;
     line-height: 98%;
     margin-top: 32px;
+
   }
 
   &-desc {
@@ -165,6 +188,7 @@ $back-color: #f7f7f7;
     line-height: 131%;
     color: $desc-color;
     margin-top: auto;
+
   }
 }
 
@@ -187,10 +211,12 @@ $back-color: #f7f7f7;
 
   &-title {
     @include title;
+    font-family: "Helvetica Neue", sans-serif;
     max-width: 1404px;
     width: 100%;
 
     span {
+      font-weight: 500;
       color: $aqua-color;
     }
   }
@@ -200,14 +226,15 @@ $back-color: #f7f7f7;
     display: flex;
     flex-direction: column;
     gap: 45px;
-    justify-content: center;
-    align-items: center;
+    //justify-content: center;
+    //align-items: center;
 
     li {
+      padding-left: 472px;
       border-bottom: 1px solid $desc-color;
       display: flex;
       align-items: flex-end;
-      justify-content: center;
+      //justify-content: center;
       width: 100%;
       padding-bottom: 25px;
       gap: 55px;
@@ -226,7 +253,7 @@ $back-color: #f7f7f7;
         font-size: 18px;
         line-height: 117%;
         color: $desc-color;
-        width: 400px;
+        width: 500px;
       }
     }
   }

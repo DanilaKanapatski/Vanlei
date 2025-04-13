@@ -21,6 +21,10 @@ button {
   background: none;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @font-face {
   font-family: 'Helvetica Neue'; /* Название шрифта (можете задать любое) */
   src: url('../fonts/HelveticaNeue-Roman.otf') format('opentype'); /* Путь к файлу */
@@ -142,6 +146,12 @@ body {
   &-nav {
     display: flex;
     gap: 48px;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   &-list {
@@ -198,6 +208,7 @@ body {
     max-width: 1017px;
 
     span {
+      font-weight: 500;
       color: $accent-color;
     }
   }
@@ -242,6 +253,7 @@ body {
 .main-slider::-webkit-scrollbar {
   display: none;
 }
+
 .main-slider {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -262,10 +274,12 @@ body {
   }
 
   &-title {
-    @include title;
+      @include title;
+      font-family: "Helvetica Neue", sans-serif;
 
     span {
       color: $aqua-color;
+      font-weight: 500;
     }
   }
 
@@ -369,10 +383,14 @@ body {
 
   &-img {
     display: block;
-    width: 100%;
+    //width: 100%;
     padding: 77px 0 76px 0;
   }
 
+  &-img__wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
 }
 
 //about
@@ -390,6 +408,7 @@ body {
     font-family: "Helvetica Neue", sans-serif;
 
     span {
+      font-weight: 500;
       color: $aqua-color;
     }
   }
@@ -454,6 +473,7 @@ body {
     max-width: 930px;
 
     span {
+      font-weight: 500;
       color: $aqua-color;
     }
   }
@@ -515,8 +535,10 @@ body {
 
   &-title {
     @include title;
+    font-family: "Helvetica Neue", sans-serif;
 
     span {
+      font-weight: 500;
       color: $aqua-color;
     }
   }
@@ -664,6 +686,7 @@ body {
     @include title;
 
     span {
+      font-weight: 500;
       color: $aqua-color;
     }
   }
@@ -729,8 +752,10 @@ body {
   &-title {
     @include title;
     max-width: 1007px;
+    font-family: "Helvetica Neue", sans-serif;
 
     span {
+      font-weight: 500;
       color: $aqua-color;
     }
   }
@@ -821,11 +846,13 @@ body {
         width: 800px;
         height: 555px;
       }
+
       &[data-size="medium"] {
         width: 400px;
         height: 445px;
         left: 810px;
       }
+
       &[data-size="small"] {
         width: 400px;
         height: 300px;
@@ -840,11 +867,13 @@ body {
         width: 600px;
         height: 416px;
       }
+
       &[data-size="medium"] {
         width: 300px;
         height: 334px;
         left: 610px;
       }
+
       &[data-size="small"] {
         width: 300px;
         height: 225px;
@@ -862,11 +891,13 @@ body {
         width: 450px;
         height: 312px;
       }
+
       &[data-size="medium"] {
         width: 220px;
         height: 250px;
         left: 460px;
       }
+
       &[data-size="small"] {
         width: 220px;
         height: 165px;
@@ -890,6 +921,7 @@ body {
       width: 100% !important;
       height: auto !important;
       margin-bottom: 20px;
+
       &[data-size] {
         left: auto !important;
       }
@@ -918,6 +950,7 @@ body {
     max-width: 1406px;
 
     span {
+      font-weight: 500;
       color: $aqua-color;
     }
   }
@@ -1146,6 +1179,12 @@ body {
 /* Стили для кастомного select */
 .select-wrapper {
   position: relative;
+  margin-bottom: 8px;
+}
+
+.coating-select {
+  padding-right: 50px !important;
+  cursor: pointer;
 }
 
 .select-arrow {
@@ -1172,6 +1211,8 @@ body {
   border-radius: 5px;
   z-index: 10;
   margin-top: 5px;
+  max-height: 200px; /* Ограничиваем высоту */
+  overflow-y: auto; /* Добавляем прокрутку */
 }
 
 .select-wrapper.active .select-options {
@@ -1195,93 +1236,10 @@ body {
   display: none;
 }
 
-input:invalid {
-  border-color: red !important;
-}
-
+input:invalid,
 .coating-select.invalid,
 input.invalid {
   border-color: red !important;
-}
-
-/* Добавляем стили для ошибок */
-.error-message {
-  color: red;
-  font-size: 14px;
-  margin-top: 5px;
-  display: none;
-}
-
-input:invalid {
-  border-color: red !important;
-}
-
-/* Дополнительные стили для select */
-.select-wrapper {
-  position: relative;
-  margin-bottom: 8px; /* Добавляем отступ как у других полей */
-}
-
-.coating-select.invalid {
-  border-color: red !important;
-}
-
-/* Стили для многошаговой формы */
-.form-step {
-  display: none;
-}
-
-.form-step.active {
-  display: block;
-}
-
-/* Стили для кастомного select */
-.select-wrapper {
-  position: relative;
-}
-
-.coating-select {
-  padding-right: 50px !important; /* Место для стрелки */
-  cursor: pointer;
-}
-
-.select-arrow {
-  position: absolute;
-  right: 33px;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: transform 0.3s ease;
-  pointer-events: none;
-}
-
-.select-wrapper.active .select-arrow {
-  transform: translateY(-50%) rotate(180deg);
-}
-
-.select-options {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  z-index: 10;
-  margin-top: 5px;
-}
-
-.select-wrapper.active .select-options {
-  display: block;
-}
-
-.option {
-  padding: 15px 20px;
-  cursor: pointer;
-}
-
-.option:hover {
-  background: #f5f5f5;
 }
 
 //stages
@@ -1302,6 +1260,7 @@ input:invalid {
     max-width: 930px;
 
     span {
+      font-weight: 500;
       color: $aqua-color;
     }
   }
@@ -1371,6 +1330,7 @@ input:invalid {
     max-width: 1194px;
 
     span {
+      font-weight: 500;
       color: $aqua-color;
     }
   }
@@ -1475,6 +1435,7 @@ input:invalid {
     max-width: 930px;
 
     span {
+      font-weight: 500;
       color: $aqua-color;
     }
   }
@@ -1548,10 +1509,11 @@ input:invalid {
 
   &-title {
     font-family: "Helvetica Neue", sans-serif;
-    max-width: 893px;
+    max-width: 842px;
     @include title;
     color: $second-color;
     margin-top: 42px;
+    font-size: clamp(24px, 3.333vw, 55px);
   }
 
   &-desc {

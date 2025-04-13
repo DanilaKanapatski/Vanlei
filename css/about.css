@@ -13,10 +13,12 @@
   font-size: clamp(24px, 3.333vw, 64px);
   line-height: 103%;
   letter-spacing: -0.02em;
+  font-family: "Helvetica Neue", sans-serif;
   max-width: 1404px;
   width: 100%;
 }
 .philosophy-title span {
+  font-weight: 500;
   color: #8db0d6;
 }
 .philosophy-name {
@@ -36,7 +38,8 @@
 }
 .philosophy-desc {
   max-width: 697px;
-  margin: 50px auto 0;
+  margin-top: 50px;
+  margin-left: 472px;
   font-size: 18px;
   line-height: 156%;
   color: #818991;
@@ -69,6 +72,7 @@
   width: 161px;
 }
 .edge-title {
+  font-family: "Helvetica Neue", sans-serif;
   font-weight: 500;
   font-size: clamp(24px, 3.333vw, 64px);
   line-height: 103%;
@@ -77,6 +81,7 @@
   width: 100%;
 }
 .edge-title span {
+  font-weight: 500;
   color: #8db0d6;
 }
 .edge-list {
@@ -93,6 +98,18 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.edge-list li:hover {
+  background: #0d3896;
+}
+.edge-list li:hover .edge-num {
+  color: #fff;
+}
+.edge-list li:hover .edge-desc {
+  color: #fff;
+}
+.edge-list li:hover .edge-subtitle {
+  color: #fff;
 }
 .edge-num {
   font-weight: 400;
@@ -135,10 +152,12 @@
   font-size: clamp(24px, 3.333vw, 64px);
   line-height: 103%;
   letter-spacing: -0.02em;
+  font-family: "Helvetica Neue", sans-serif;
   max-width: 1404px;
   width: 100%;
 }
 .numbers-title span {
+  font-weight: 500;
   color: #8db0d6;
 }
 .numbers-list {
@@ -146,14 +165,12 @@
   display: flex;
   flex-direction: column;
   gap: 45px;
-  justify-content: center;
-  align-items: center;
 }
 .numbers-list li {
+  padding-left: 472px;
   border-bottom: 1px solid #818991;
   display: flex;
   align-items: flex-end;
-  justify-content: center;
   width: 100%;
   padding-bottom: 25px;
   gap: 55px;
@@ -171,7 +188,7 @@
   font-size: 18px;
   line-height: 117%;
   color: #818991;
-  width: 400px;
+  width: 500px;
 }
 .numbers-video {
   width: 100%;

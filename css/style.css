@@ -21,6 +21,10 @@ button {
   background: none;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @font-face {
   font-family: "Helvetica Neue"; /* Название шрифта (можете задать любое) */
   src: url("../fonts/HelveticaNeue-Roman.otf") format("opentype"); /* Путь к файлу */
@@ -86,6 +90,11 @@ body {
   display: flex;
   gap: 48px;
 }
+.header-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .header-list {
   height: 100%;
   border-left: 1.5px solid #ededed;
@@ -135,6 +144,7 @@ body {
   max-width: 1017px;
 }
 .main-title span {
+  font-weight: 500;
   color: #0139b0;
 }
 .main-desc {
@@ -202,9 +212,11 @@ body {
   font-size: clamp(24px, 3.333vw, 64px);
   line-height: 103%;
   letter-spacing: -0.02em;
+  font-family: "Helvetica Neue", sans-serif;
 }
 .advantages-title span {
   color: #8db0d6;
+  font-weight: 500;
 }
 .advantages-name {
   letter-spacing: -0.04em;
@@ -288,8 +300,11 @@ body {
 }
 .advantages-img {
   display: block;
-  width: 100%;
   padding: 77px 0 76px 0;
+}
+.advantages-img__wrapper {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .about {
@@ -307,6 +322,7 @@ body {
   font-family: "Helvetica Neue", sans-serif;
 }
 .about-title span {
+  font-weight: 500;
   color: #8db0d6;
 }
 .about-name {
@@ -377,6 +393,7 @@ body {
   max-width: 930px;
 }
 .region-title span {
+  font-weight: 500;
   color: #8db0d6;
 }
 .region-number {
@@ -429,8 +446,10 @@ body {
   font-size: clamp(24px, 3.333vw, 64px);
   line-height: 103%;
   letter-spacing: -0.02em;
+  font-family: "Helvetica Neue", sans-serif;
 }
 .catalog-title span {
+  font-weight: 500;
   color: #8db0d6;
 }
 .catalog-wrapper {
@@ -568,6 +587,7 @@ body {
   letter-spacing: -0.02em;
 }
 .color-title span {
+  font-weight: 500;
   color: #8db0d6;
 }
 .color-desc {
@@ -637,8 +657,10 @@ body {
   line-height: 103%;
   letter-spacing: -0.02em;
   max-width: 1007px;
+  font-family: "Helvetica Neue", sans-serif;
 }
 .projects-title span {
+  font-weight: 500;
   color: #8db0d6;
 }
 .projects-nav {
@@ -807,6 +829,7 @@ body {
   max-width: 1406px;
 }
 .vr-title span {
+  font-weight: 500;
   color: #8db0d6;
 }
 .vr-name {
@@ -1047,6 +1070,12 @@ body {
 /* Стили для кастомного select */
 .select-wrapper {
   position: relative;
+  margin-bottom: 8px;
+}
+
+.coating-select {
+  padding-right: 50px !important;
+  cursor: pointer;
 }
 
 .select-arrow {
@@ -1073,6 +1102,8 @@ body {
   border-radius: 5px;
   z-index: 10;
   margin-top: 5px;
+  max-height: 200px; /* Ограничиваем высоту */
+  overflow-y: auto; /* Добавляем прокрутку */
 }
 
 .select-wrapper.active .select-options {
@@ -1096,93 +1127,10 @@ body {
   display: none;
 }
 
-input:invalid {
-  border-color: red !important;
-}
-
+input:invalid,
 .coating-select.invalid,
 input.invalid {
   border-color: red !important;
-}
-
-/* Добавляем стили для ошибок */
-.error-message {
-  color: red;
-  font-size: 14px;
-  margin-top: 5px;
-  display: none;
-}
-
-input:invalid {
-  border-color: red !important;
-}
-
-/* Дополнительные стили для select */
-.select-wrapper {
-  position: relative;
-  margin-bottom: 8px; /* Добавляем отступ как у других полей */
-}
-
-.coating-select.invalid {
-  border-color: red !important;
-}
-
-/* Стили для многошаговой формы */
-.form-step {
-  display: none;
-}
-
-.form-step.active {
-  display: block;
-}
-
-/* Стили для кастомного select */
-.select-wrapper {
-  position: relative;
-}
-
-.coating-select {
-  padding-right: 50px !important; /* Место для стрелки */
-  cursor: pointer;
-}
-
-.select-arrow {
-  position: absolute;
-  right: 33px;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: transform 0.3s ease;
-  pointer-events: none;
-}
-
-.select-wrapper.active .select-arrow {
-  transform: translateY(-50%) rotate(180deg);
-}
-
-.select-options {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  z-index: 10;
-  margin-top: 5px;
-}
-
-.select-wrapper.active .select-options {
-  display: block;
-}
-
-.option {
-  padding: 15px 20px;
-  cursor: pointer;
-}
-
-.option:hover {
-  background: #f5f5f5;
 }
 
 .stages {
@@ -1203,6 +1151,7 @@ input:invalid {
   max-width: 930px;
 }
 .stages-title span {
+  font-weight: 500;
   color: #8db0d6;
 }
 .stages-name {
@@ -1273,6 +1222,7 @@ input:invalid {
   max-width: 1194px;
 }
 .certificates-title span {
+  font-weight: 500;
   color: #8db0d6;
 }
 .certificates-nav {
@@ -1365,6 +1315,7 @@ input:invalid {
   max-width: 930px;
 }
 .questions-title span {
+  font-weight: 500;
   color: #8db0d6;
 }
 .questions-name {
@@ -1434,13 +1385,14 @@ input:invalid {
 }
 .contacts-title {
   font-family: "Helvetica Neue", sans-serif;
-  max-width: 893px;
+  max-width: 842px;
   font-weight: 500;
   font-size: clamp(24px, 3.333vw, 64px);
   line-height: 103%;
   letter-spacing: -0.02em;
   color: #fff;
   margin-top: 42px;
+  font-size: clamp(24px, 3.333vw, 55px);
 }
 .contacts-desc {
   max-width: 458px;
