@@ -1000,6 +1000,7 @@ body {
 }
 
 .cost-title span {
+  font-weight: 500;
   color: #8db0d6;
 }
 
@@ -1191,7 +1192,7 @@ input.invalid {
   font-weight: 500;
   font-size: 28px;
   line-height: 90%;
-  letter-spacing: -0.06em;
+  letter-spacing: 0.01em;
 }
 
 .certificates {
