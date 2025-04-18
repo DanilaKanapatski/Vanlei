@@ -264,3 +264,174 @@ $back-color: #f7f7f7;
     border-radius: 15px;
   }
 }
+
+.back-img__mob {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+
+  .back {
+    padding-top: 36px;
+
+    .back-img {
+      display: none;
+    }
+
+    .back-img__mob {
+      display: block;
+    }
+
+  }
+
+  .philosophy {
+    margin-top: 120px;
+
+    &-title {
+      max-width: 360px;
+    }
+
+    &-name {
+      width: 119px;
+      padding: 9px 0;
+    }
+
+    &-wrapper {
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 28px;
+    }
+
+    &-desc {
+      max-width: 360px;
+      margin-top: 28px;
+      margin-left: 0;
+      font-size: 14px;
+      line-height: 136%;
+    }
+
+    &-images {
+      margin-top: 40px;
+      gap: 10px;
+      flex-direction: column;
+
+      img {
+        border-radius: 5px;
+        width: 100%;
+      }
+    }
+  }
+
+  .edge {
+    margin-top: 120px;
+
+    &-wrapper {
+      flex-wrap: wrap;
+      align-items: normal;
+      gap: 25px;
+      margin-bottom: 28px;
+    }
+
+    &-name {
+      width: 119px;
+      font-size: 12px;
+      padding: 11px 0;
+    }
+
+    &-title {
+      max-width: 300px;
+
+    }
+
+    &-list {
+      margin-top: 28px;
+      flex-wrap: wrap;
+      gap: 28px;
+
+      li {
+        width: 100%;
+        padding: 22px;
+        height: 333px;
+
+      }
+    }
+
+    &-num {
+      font-family: "Kaushan Script", cursive;
+      line-height: normal;
+    }
+
+    &-subtitle {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 98%;
+      margin-top: 31px;
+
+    }
+
+    &-desc {
+      font-size: 14px;
+      line-height: 136%;
+
+    }
+  }
+
+  .numbers {
+    margin-top: 120px;
+
+    &-wrapper {
+      flex-wrap: wrap;
+      align-items: normal;
+      gap: 25px;
+      margin-bottom: 28px;
+    }
+
+    &-name {
+      padding: 9px 0;
+      width: 119px;
+    }
+
+    &-title {
+      max-width: 360px;
+
+    }
+
+    &-list {
+      margin-top: 39px;
+      gap: 30px;
+
+      li {
+        padding-left: 0;
+        align-items: flex-start;
+        padding-bottom: 40px;
+        flex-direction: column;
+        gap: 25px;
+
+        span:first-child {
+          font-size: 50px;
+          line-height: 90%;
+          letter-spacing: -0.06em;
+          width: auto;
+        }
+
+        span:nth-child(2) {
+          font-size: 14px;
+          max-width: 267px;
+          line-height: 150%;
+          width: auto;
+        }
+      }
+    }
+
+    &-video {
+      margin-top: 75px;
+      border-radius: 5px;
+    }
+  }
+
+
+}
+
+
+
