@@ -101,3 +101,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initSlider();
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const certSlides = document.querySelectorAll('.certificates .slide');
+    const modalOverlay = document.querySelector('.modal-overlay');
+    const modalImage = document.querySelector('.modal-image');
+    const modalClose = document.querySelector('.modal-close');
+
+    certSlides.forEach(slide => {
+        slide.addEventListener('click', function() {
+            const imgSrc = this.querySelector('img').getAttribute('src');
+
+            // Настройки для сертификатов
+            modalImage.setAttribute('src', imgSrc);
+            modalImage.style.width = 'auto';
+            modalImage.style.height = 'auto';
+            modalImage.style.maxWidth = '90vw';
+            modalImage.style.maxHeight = '90vh';
+            modalImage.style.objectFit = 'contain';
+
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    // Общие функции закрытия
+    function closeModal() {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+
+    modalOverlay.addEventListener('click', function(e) {
+        if (e.target === modalOverlay) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    // Функции закрытия не дублируем, они уже есть в projects-modal.js
+});

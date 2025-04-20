@@ -130,3 +130,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initSlides();
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const projectSlides = document.querySelectorAll('.projects .slide');
+    const modalOverlay = document.querySelector('.modal-overlay');
+    const modalImage = document.querySelector('.modal-image');
+    const modalClose = document.querySelector('.modal-close');
+
+    // Получаем размеры самого большого слайда проектов
+    const largeProjectSlide = document.querySelector('.projects .slide[data-size="large"]');
+    const largeSlideWidth = largeProjectSlide.offsetWidth;
+    const largeSlideHeight = largeProjectSlide.offsetHeight;
+
+    projectSlides.forEach(slide => {
+        slide.addEventListener('click', function() {
+            const imgSrc = this.querySelector('img').getAttribute('src');
+
+            // Настройки для проектов
+            modalImage.setAttribute('src', imgSrc);
+            modalImage.style.width = `${largeSlideWidth}px`;
+            modalImage.style.height = `${largeSlideHeight}px`;
+            modalImage.style.maxWidth = 'none';
+            modalImage.style.maxHeight = 'none';
+            modalImage.style.objectFit = 'cover';
+
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    // Общие функции закрытия
+    function closeModal() {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+
+    modalOverlay.addEventListener('click', function(e) {
+        if (e.target === modalOverlay) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+            closeModal();
+        }
+    });
+});
