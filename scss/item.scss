@@ -26,7 +26,8 @@ $back-color: #f7f7f7;
 @mixin section-name {
   letter-spacing: -0.04em;
   color: $desc-color;
-  padding: 19px 0;
+  padding: 15px 0;
+  flex-shrink: 0;
   border: 1px solid $desc-color;
   border-radius: 36px;
   text-align: center;
@@ -122,7 +123,13 @@ $back-color: #f7f7f7;
     display: flex;
     gap: 20px;
     width: 100%;
-    max-width: 1200px; // Увеличим максимальную ширину
+    max-width: 70%; // Ограничиваем ширину слайдера
+    flex-shrink: 0; // Запрещаем сжатие
+
+    @media screen and (max-width: 1600px){
+      max-width: 65%; // Ограничиваем ширину слайдера
+
+    }
   }
 }
 
@@ -265,11 +272,11 @@ $back-color: #f7f7f7;
   }
 }
 
-.instructions {
+.instructions ul {
   margin-top: 48px;
   display: flex;
   gap: 10px;
-  justify-content: space-between;
+  //justify-content: space-between;
   flex-wrap: wrap;
 
   li {
@@ -283,19 +290,19 @@ $back-color: #f7f7f7;
     flex-direction: column;
   }
 
-  &-title {
-    font-size: 36px;
+  .instructions-title {
+    font-size: clamp(20px, 2vw, 36px);
     line-height: 98%;
     margin-top: 32px;
   }
 
-  &-desc {
+  .instructions-desc {
     line-height: 131%;
     color: $desc-color;
     margin-top: auto;
   }
 
-  &-num {
+  .instructions-num {
     font-size: 18px;
     line-height: 117%;
     color: #0139b0;
@@ -448,6 +455,10 @@ $back-color: #f7f7f7;
     margin-top: 50px;
     display: flex;
     gap: 11px;
+
+    @media screen and (max-width: 1919px){
+      justify-content: space-between;
+    }
   }
 
   &-item {
@@ -459,6 +470,11 @@ $back-color: #f7f7f7;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+
+    @media screen and (max-width: 1919px){
+     width: 24.5%;
+      height: 815px;
+    }
   }
 
   &-item__link {

@@ -77,7 +77,13 @@
   display: flex;
   gap: 20px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 70%;
+  flex-shrink: 0;
+}
+@media screen and (max-width: 1600px) {
+  .item-slider__wrapper {
+    max-width: 65%;
+  }
 }
 
 .color-slider {
@@ -191,7 +197,8 @@
 .characteristics-name {
   letter-spacing: -0.04em;
   color: #818991;
-  padding: 19px 0;
+  padding: 15px 0;
+  flex-shrink: 0;
   border: 1px solid #818991;
   border-radius: 36px;
   text-align: center;
@@ -208,14 +215,13 @@
   gap: 70px;
 }
 
-.instructions {
+.instructions ul {
   margin-top: 48px;
   display: flex;
   gap: 10px;
-  justify-content: space-between;
   flex-wrap: wrap;
 }
-.instructions li {
+.instructions ul li {
   padding: 22px 24px 25px 24px;
   height: 477px;
   border-radius: 15px;
@@ -225,17 +231,17 @@
   justify-content: space-between;
   flex-direction: column;
 }
-.instructions-title {
-  font-size: 36px;
+.instructions ul .instructions-title {
+  font-size: clamp(20px, 2vw, 36px);
   line-height: 98%;
   margin-top: 32px;
 }
-.instructions-desc {
+.instructions ul .instructions-desc {
   line-height: 131%;
   color: #818991;
   margin-top: auto;
 }
-.instructions-num {
+.instructions ul .instructions-num {
   font-size: 18px;
   line-height: 117%;
   color: #0139b0;
@@ -328,7 +334,8 @@
 .recommendations-name {
   letter-spacing: -0.04em;
   color: #818991;
-  padding: 19px 0;
+  padding: 15px 0;
+  flex-shrink: 0;
   border: 1px solid #818991;
   border-radius: 36px;
   text-align: center;
@@ -385,6 +392,11 @@
   display: flex;
   gap: 11px;
 }
+@media screen and (max-width: 1919px) {
+  .recommendations-list {
+    justify-content: space-between;
+  }
+}
 .recommendations-item {
   height: 851px;
   max-width: 461px;
@@ -394,6 +406,12 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+}
+@media screen and (max-width: 1919px) {
+  .recommendations-item {
+    width: 24.5%;
+    height: 815px;
+  }
 }
 .recommendations-item__link {
   height: 100%;

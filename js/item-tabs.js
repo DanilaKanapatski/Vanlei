@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else if (tabName === 'application') {
                 document.querySelector('.application').style.display = 'block';
             } else if (tabName === 'instructions') {
-                document.querySelector('.instructions').style.display = 'flex';
+                document.querySelector('.instructions').style.display = 'block';
             }
         });
     });

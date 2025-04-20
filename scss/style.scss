@@ -84,8 +84,9 @@ $back-color: #f7f7f7;
   border-radius: 5px;
   background: #ebebeb;
   font-size: 18px;
+  font-family: "Inter", sans-serif;
   line-height: 133%;
-  padding: 30px 20px;
+  padding: 25px 20px;
   color: $desc-color;
   @media screen and (max-width: 768px) {
     font-size: 14px;
@@ -96,7 +97,8 @@ $back-color: #f7f7f7;
 @mixin section-name {
   letter-spacing: -0.04em;
   color: $desc-color;
-  padding: 19px 0;
+  padding: 15px 0;
+  flex-shrink: 0;
   border: 1px solid $desc-color;
   border-radius: 36px;
   text-align: center;
@@ -170,18 +172,23 @@ body {
     border-left: 1.50px solid #ededed;
     display: flex;
     gap: 2.6vw;
-    padding: 25px 0 26px 48px;
+    justify-content: space-between;
+    padding: 24px 0 25px 48px;
+
+    @media screen and (max-width: 1500px) {
+      gap: 20px;
+    }
   }
 
   &-tel {
     display: block;
-    padding: 25px 20px 26px 20px; /* Уменьшил отступы */
+    padding: 24px 20px 26px 20px; /* Уменьшил отступы */
     border-left: 1.5px solid #ededed;
     white-space: nowrap; /* Запрещаем перенос текста */
   }
 
   &-link {
-    padding: 25px 50px 26px;
+    padding: 24px 50px;
     text-align: center;
     display: block;
     background: $accent-color;
@@ -209,6 +216,8 @@ body {
   &-content {
     display: flex;
     align-items: flex-end;
+    //flex-wrap: wrap;
+    gap: 30px;
     justify-content: space-between;
     margin-bottom: 40px;
   }
@@ -236,7 +245,7 @@ body {
     @include btn;
     max-width: 461px;
     border-radius: 5px;
-    padding: 23px 0 22px;
+    padding: 19px 0 20px;
   }
 }
 
@@ -370,6 +379,24 @@ body {
       }
     }
 
+    li:nth-child(1) .advantages-img {
+      @media screen and  (max-width: 1860px) {
+        width: auto;
+      }
+    }
+
+    li:nth-child(14) .advantages-img {
+      @media screen and  (max-width: 1860px) {
+        width: auto;
+      }
+    }
+
+    li:nth-child(16) .advantages-img {
+      @media screen and  (max-width: 1860px) {
+        width: auto;
+      }
+    }
+
     .empty {
       // Пустые элементы будут автоматически уменьшаться
       min-width: 0; // Важно для сжатия
@@ -396,6 +423,10 @@ body {
     display: block;
     //width: 100%;
     padding: 77px 0 76px 0;
+
+    @media screen and  (max-width: 1860px) {
+      width: 100%;
+    }
   }
 
   &-img__wrapper {
@@ -408,6 +439,8 @@ body {
 
 .about {
   margin-top: 190px;
+
+
 
   &-content {
     width: 100%;
@@ -433,7 +466,7 @@ body {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 50px;
+    gap: 311px;
   }
 
   &-desc {
@@ -451,6 +484,10 @@ body {
     font-weight: 500;
     font-size: 18px;
     height: 73px;
+  }
+
+  &-mob {
+    display: none;
   }
 
   &-video {
@@ -498,10 +535,11 @@ body {
   &-desc {
     line-height: 131%;
     color: $desc-color;
+    max-width: 542px;
   }
 
   &-subtitle {
-    font-size: 36px;
+    font-size: clamp(20px, 2vw, 36px);
     line-height: 98%;
     margin: 35px 0 31px;
   }
@@ -509,6 +547,7 @@ body {
   &-list {
     margin-top: 50px;
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
     gap: 12px;
 
@@ -521,19 +560,54 @@ body {
       height: 564px;
       background: $back-color;
       border-radius: 15px;
+      @media screen and (max-width: 1919px) {
+        max-width: none;
+        width: 49%;
+      }
 
       img {
         text-align: center;
         display: block;
         margin: auto auto 0 auto;
+
+        @media screen and (max-width: 1919px) {
+          width: 70%;
+        }
+      }
+
+      &:first-child img {
+
+        @media screen and (max-width: 1919px) {
+
+          width: 90%;
+        }
+      }
+
+      &:nth-child(2) img {
+
+        @media screen and (max-width: 1919px) {
+
+          width: 90%;
+        }
       }
 
       &:first-child {
         max-width: 460px;
+
+        @media screen and (max-width: 1919px) {
+          max-width: none;
+          width: 24%;
+        }
       }
 
       &:nth-child(2) {
         max-width: 460px;
+
+        @media screen and (max-width: 1919px) {
+          max-width: none;
+          width: 24%;
+
+        }
       }
     }
   }
@@ -608,7 +682,7 @@ body {
   &-link {
     margin-top: 25px;
     @include btn;
-    padding: 23px 0;
+    padding: 20px 0;
     position: relative;
     z-index: 2;
     border-radius: 5px;
@@ -617,8 +691,16 @@ body {
   &-list {
     margin-top: 50px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr); // 4 колонки
+    grid-template-columns: repeat(4, minmax(0, 1fr)); // Ключевое изменение!
     gap: 45px 10px;
+    width: 100%;
+    max-width: 100%; // Важно!
+
+    @media screen and (max-width: 1700px){
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
 
     /* Все карточки по умолчанию занимают 1 колонку */
     .catalog-item {
@@ -687,8 +769,8 @@ body {
     z-index: 10;
     background: $second-color;
     border-radius: 15px;
-    max-width: 854px;
-    width: 100%;
+    max-width: none;
+    width: 44.4%;
     padding: 66px 30px;
   }
 
@@ -852,6 +934,14 @@ body {
 
   /* Адаптация для разных экранов */
   @media (max-width: 1800px) {
+    &-slider {
+      margin-top: 50px;
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+      height: 558px; /* Высота самого большого слайда */
+    }
+
     .slide {
       &[data-size="large"] {
         width: 800px;
@@ -959,6 +1049,7 @@ body {
     @include title;
     font-family: "Helvetica Neue", sans-serif;
     max-width: 1406px;
+    width: 100%;
 
     span {
       font-weight: 500;
@@ -1122,7 +1213,7 @@ body {
   z-index: 10;
   background: $second-color;
   border-radius: 15px;
-  max-width: 854px;
+  max-width: 44.4%;
   width: 100%;
   padding: 66px 30px;
 }
@@ -1261,7 +1352,7 @@ input.invalid {
 
   &-wrapper {
     display: flex;
-    gap: 340px;
+    gap: 311px;
     margin-bottom: 50px;
     align-items: flex-start;
   }
@@ -1270,6 +1361,7 @@ input.invalid {
     @include title;
     font-family: "Helvetica Neue", sans-serif;
     max-width: 930px;
+    width: 100%;
 
     span {
       font-weight: 500;
@@ -1327,7 +1419,7 @@ input.invalid {
 
   &-wrapper {
     display: flex;
-    gap: 325px;
+    gap: 311px;
     align-items: flex-start;
     margin-bottom: 50px;
   }
@@ -1339,7 +1431,8 @@ input.invalid {
 
   &-title {
     @include title;
-    max-width: 1194px;
+    max-width: 1024px;
+    width: 100%;
 
     span {
       font-weight: 500;
@@ -1405,13 +1498,13 @@ input.invalid {
 #certificates .slide img {
   width: 100%;
   height: 669px;
-  object-fit: cover;
+  //object-fit: cover;
   display: block;
   border-radius: 10px;
 }
 
 /* Адаптация */
-@media (max-width: 1200px) {
+@media (max-width: 1560px) {
   #certificates .slide {
     flex: 0 0 calc(33.333% - 6.666px); /* 3 слайда */
   }
@@ -1506,8 +1599,7 @@ input.invalid {
   margin-top: 190px;
 
   img {
-    max-width: 933px;
-    width: 100%;
+    width: 50%;
   }
 
   .container {
@@ -1516,7 +1608,7 @@ input.invalid {
   }
 
   &-content {
-    width: 100%;
+    width: 50%;
     background: $accent-color;
     padding: 30px 30px 40px 30px;
     border-radius: 15px;
@@ -1659,6 +1751,11 @@ input.invalid {
     padding-left: 32px;
     display: flex;
     justify-content: space-between;
+
+    @media screen and (max-width: 1768px) {
+      flex-wrap: wrap;
+      gap: 20px;
+    }
   }
 
   &-main {
@@ -1789,30 +1886,6 @@ input.invalid {
     bottom: -10px;
     left: 28px;
     width: 100%;
-  }
-}
-
-@media (max-width: 1919px) {
-  .catalog-list {
-    grid-template-columns: repeat(3, 1fr);
-
-    /* Сбрасываем кастомное позиционирование */
-    .catalog-item {
-      grid-column: span 1 !important;
-      grid-row: auto !important;
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .catalog-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .catalog-list {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -2038,6 +2111,10 @@ input.invalid {
       padding: 15px 0;
       border-radius: 5px;
       height: auto;
+    }
+
+    &-mob {
+      display: block;
     }
 
     &-video {
@@ -2420,7 +2497,7 @@ input.invalid {
     max-width: 360px;
     width: 100%;
     padding: 30px 12px 12px 12px;
-    margin:  0 auto;
+    margin: 0 auto;
   }
 
   .cost-title {
@@ -2739,6 +2816,7 @@ input.invalid {
           color: #818991;
           font-family: "Helvetica Neue", sans-serif;
         }
+
         div {
           display: flex;
           gap: 14px;

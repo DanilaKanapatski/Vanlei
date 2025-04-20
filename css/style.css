@@ -100,16 +100,22 @@ body {
   border-left: 1.5px solid #ededed;
   display: flex;
   gap: 2.6vw;
-  padding: 25px 0 26px 48px;
+  justify-content: space-between;
+  padding: 24px 0 25px 48px;
+}
+@media screen and (max-width: 1500px) {
+  .header-list {
+    gap: 20px;
+  }
 }
 .header-tel {
   display: block;
-  padding: 25px 20px 26px 20px; /* Уменьшил отступы */
+  padding: 24px 20px 26px 20px; /* Уменьшил отступы */
   border-left: 1.5px solid #ededed;
   white-space: nowrap; /* Запрещаем перенос текста */
 }
 .header-link {
-  padding: 25px 50px 26px;
+  padding: 24px 50px;
   text-align: center;
   display: block;
   background: #0139b0;
@@ -132,6 +138,7 @@ body {
 .main-content {
   display: flex;
   align-items: flex-end;
+  gap: 30px;
   justify-content: space-between;
   margin-bottom: 40px;
 }
@@ -163,7 +170,7 @@ body {
   cursor: pointer;
   max-width: 461px;
   border-radius: 5px;
-  padding: 23px 0 22px;
+  padding: 19px 0 20px;
 }
 
 .main-slider {
@@ -221,7 +228,8 @@ body {
 .advantages-name {
   letter-spacing: -0.04em;
   color: #818991;
-  padding: 19px 0;
+  padding: 15px 0;
+  flex-shrink: 0;
   border: 1px solid #818991;
   border-radius: 36px;
   text-align: center;
@@ -289,6 +297,21 @@ body {
 .advantages-list li .advantages-desc {
   font-size: clamp(12px, 1.5vw, 16px);
 }
+@media screen and (max-width: 1860px) {
+  .advantages-list li:nth-child(1) .advantages-img {
+    width: auto;
+  }
+}
+@media screen and (max-width: 1860px) {
+  .advantages-list li:nth-child(14) .advantages-img {
+    width: auto;
+  }
+}
+@media screen and (max-width: 1860px) {
+  .advantages-list li:nth-child(16) .advantages-img {
+    width: auto;
+  }
+}
 .advantages-list .empty {
   min-width: 0;
 }
@@ -308,6 +331,11 @@ body {
 .advantages-img {
   display: block;
   padding: 77px 0 76px 0;
+}
+@media screen and (max-width: 1860px) {
+  .advantages-img {
+    width: 100%;
+  }
 }
 .advantages-img__wrapper {
   display: flex;
@@ -335,7 +363,8 @@ body {
 .about-name {
   letter-spacing: -0.04em;
   color: #818991;
-  padding: 19px 0;
+  padding: 15px 0;
+  flex-shrink: 0;
   border: 1px solid #818991;
   border-radius: 36px;
   text-align: center;
@@ -352,7 +381,7 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 50px;
+  gap: 311px;
 }
 .about-desc {
   margin-top: 50px;
@@ -374,6 +403,9 @@ body {
   font-size: 18px;
   height: 73px;
 }
+.about-mob {
+  display: none;
+}
 .about-video {
   border-radius: 15px;
   width: 100%;
@@ -392,7 +424,8 @@ body {
 .region-name {
   letter-spacing: -0.04em;
   color: #818991;
-  padding: 19px 0;
+  padding: 15px 0;
+  flex-shrink: 0;
   border: 1px solid #818991;
   border-radius: 36px;
   text-align: center;
@@ -425,15 +458,17 @@ body {
 .region-desc {
   line-height: 131%;
   color: #818991;
+  max-width: 542px;
 }
 .region-subtitle {
-  font-size: 36px;
+  font-size: clamp(20px, 2vw, 36px);
   line-height: 98%;
   margin: 35px 0 31px;
 }
 .region-list {
   margin-top: 50px;
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 12px;
 }
@@ -447,16 +482,49 @@ body {
   background: #f7f7f7;
   border-radius: 15px;
 }
+@media screen and (max-width: 1919px) {
+  .region-list li {
+    max-width: none;
+    width: 49%;
+  }
+}
 .region-list li img {
   text-align: center;
   display: block;
   margin: auto auto 0 auto;
 }
+@media screen and (max-width: 1919px) {
+  .region-list li img {
+    width: 70%;
+  }
+}
+@media screen and (max-width: 1919px) {
+  .region-list li:first-child img {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 1919px) {
+  .region-list li:nth-child(2) img {
+    width: 90%;
+  }
+}
 .region-list li:first-child {
   max-width: 460px;
 }
+@media screen and (max-width: 1919px) {
+  .region-list li:first-child {
+    max-width: none;
+    width: 24%;
+  }
+}
 .region-list li:nth-child(2) {
   max-width: 460px;
+}
+@media screen and (max-width: 1919px) {
+  .region-list li:nth-child(2) {
+    max-width: none;
+    width: 24%;
+  }
 }
 
 .catalog {
@@ -482,7 +550,8 @@ body {
 .catalog-name {
   letter-spacing: -0.04em;
   color: #818991;
-  padding: 19px 0;
+  padding: 15px 0;
+  flex-shrink: 0;
   border: 1px solid #818991;
   border-radius: 36px;
   text-align: center;
@@ -536,7 +605,7 @@ body {
   display: block;
   width: 100%;
   cursor: pointer;
-  padding: 23px 0;
+  padding: 20px 0;
   position: relative;
   z-index: 2;
   border-radius: 5px;
@@ -544,11 +613,20 @@ body {
 .catalog-list {
   margin-top: 50px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 45px 10px;
+  width: 100%;
+  max-width: 100%;
   /* Все карточки по умолчанию занимают 1 колонку */
   /* 7-я карточка (4-я во второй строке) */
   /* 8-я и 9-я карточки (третья строка по центру) */
+}
+@media screen and (max-width: 1700px) {
+  .catalog-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
 }
 .catalog-list .catalog-item {
   grid-column: span 1;
@@ -603,8 +681,8 @@ body {
   z-index: 10;
   background: #fff;
   border-radius: 15px;
-  max-width: 854px;
-  width: 100%;
+  max-width: none;
+  width: 44.4%;
   padding: 66px 30px;
 }
 .color-title {
@@ -634,8 +712,9 @@ body {
   border-radius: 5px;
   background: #ebebeb;
   font-size: 18px;
+  font-family: "Inter", sans-serif;
   line-height: 133%;
-  padding: 30px 20px;
+  padding: 25px 20px;
   color: #818991;
 }
 @media screen and (max-width: 768px) {
@@ -721,7 +800,8 @@ body {
 .projects-name {
   letter-spacing: -0.04em;
   color: #818991;
-  padding: 19px 0;
+  padding: 15px 0;
+  flex-shrink: 0;
   border: 1px solid #818991;
   border-radius: 36px;
   text-align: center;
@@ -776,6 +856,13 @@ body {
   border-radius: 15px;
 }
 @media (max-width: 1800px) {
+  .projects-slider {
+    margin-top: 50px;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    height: 558px; /* Высота самого большого слайда */
+  }
   .projects .slide[data-size=large] {
     width: 800px;
     height: 555px;
@@ -868,6 +955,7 @@ body {
   letter-spacing: -0.02em;
   font-family: "Helvetica Neue", sans-serif;
   max-width: 1406px;
+  width: 100%;
 }
 .vr-title span {
   font-weight: 500;
@@ -876,7 +964,8 @@ body {
 .vr-name {
   letter-spacing: -0.04em;
   color: #818991;
-  padding: 19px 0;
+  padding: 15px 0;
+  flex-shrink: 0;
   border: 1px solid #818991;
   border-radius: 36px;
   text-align: center;
@@ -1034,7 +1123,7 @@ body {
   z-index: 10;
   background: #fff;
   border-radius: 15px;
-  max-width: 854px;
+  max-width: 44.4%;
   width: 100%;
   padding: 66px 30px;
 }
@@ -1070,8 +1159,9 @@ body {
   border-radius: 5px;
   background: #ebebeb;
   font-size: 18px;
+  font-family: "Inter", sans-serif;
   line-height: 133%;
-  padding: 30px 20px;
+  padding: 25px 20px;
   color: #818991;
 }
 @media screen and (max-width: 768px) {
@@ -1193,7 +1283,7 @@ input.invalid {
 }
 .stages-wrapper {
   display: flex;
-  gap: 340px;
+  gap: 311px;
   margin-bottom: 50px;
   align-items: flex-start;
 }
@@ -1204,6 +1294,7 @@ input.invalid {
   letter-spacing: -0.02em;
   font-family: "Helvetica Neue", sans-serif;
   max-width: 930px;
+  width: 100%;
 }
 .stages-title span {
   font-weight: 500;
@@ -1212,7 +1303,8 @@ input.invalid {
 .stages-name {
   letter-spacing: -0.04em;
   color: #818991;
-  padding: 19px 0;
+  padding: 15px 0;
+  flex-shrink: 0;
   border: 1px solid #818991;
   border-radius: 36px;
   text-align: center;
@@ -1263,14 +1355,15 @@ input.invalid {
 }
 .certificates-wrapper {
   display: flex;
-  gap: 325px;
+  gap: 311px;
   align-items: flex-start;
   margin-bottom: 50px;
 }
 .certificates-name {
   letter-spacing: -0.04em;
   color: #818991;
-  padding: 19px 0;
+  padding: 15px 0;
+  flex-shrink: 0;
   border: 1px solid #818991;
   border-radius: 36px;
   text-align: center;
@@ -1288,7 +1381,8 @@ input.invalid {
   font-size: clamp(24px, 3.333vw, 64px);
   line-height: 103%;
   letter-spacing: -0.02em;
-  max-width: 1194px;
+  max-width: 1024px;
+  width: 100%;
 }
 .certificates-title span {
   font-weight: 500;
@@ -1345,13 +1439,12 @@ input.invalid {
 #certificates .slide img {
   width: 100%;
   height: 669px;
-  object-fit: cover;
   display: block;
   border-radius: 10px;
 }
 
 /* Адаптация */
-@media (max-width: 1200px) {
+@media (max-width: 1560px) {
   #certificates .slide {
     flex: 0 0 calc(33.333% - 6.666px); /* 3 слайда */
   }
@@ -1390,7 +1483,8 @@ input.invalid {
 .questions-name {
   letter-spacing: -0.04em;
   color: #818991;
-  padding: 19px 0;
+  padding: 15px 0;
+  flex-shrink: 0;
   border: 1px solid #818991;
   border-radius: 36px;
   text-align: center;
@@ -1445,15 +1539,14 @@ input.invalid {
   margin-top: 190px;
 }
 .contacts img {
-  max-width: 933px;
-  width: 100%;
+  width: 50%;
 }
 .contacts .container {
   display: flex;
   gap: 10px;
 }
 .contacts-content {
-  width: 100%;
+  width: 50%;
   background: #0139b0;
   padding: 30px 30px 40px 30px;
   border-radius: 15px;
@@ -1461,7 +1554,8 @@ input.invalid {
 .contacts-name {
   letter-spacing: -0.04em;
   color: #818991;
-  padding: 19px 0;
+  padding: 15px 0;
+  flex-shrink: 0;
   border: 1px solid #818991;
   border-radius: 36px;
   text-align: center;
@@ -1505,8 +1599,9 @@ input.invalid {
   border-radius: 5px;
   background: #ebebeb;
   font-size: 18px;
+  font-family: "Inter", sans-serif;
   line-height: 133%;
-  padding: 30px 20px;
+  padding: 25px 20px;
   color: #818991;
 }
 @media screen and (max-width: 768px) {
@@ -1606,6 +1701,12 @@ input.invalid {
   padding-left: 32px;
   display: flex;
   justify-content: space-between;
+}
+@media screen and (max-width: 1768px) {
+  .footer-links {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
 }
 .footer-main {
   margin-top: 10px;
@@ -1722,26 +1823,6 @@ input.invalid {
   width: 100%;
 }
 
-@media (max-width: 1919px) {
-  .catalog-list {
-    grid-template-columns: repeat(3, 1fr);
-    /* Сбрасываем кастомное позиционирование */
-  }
-  .catalog-list .catalog-item {
-    grid-column: span 1 !important;
-    grid-row: auto !important;
-  }
-}
-@media (max-width: 768px) {
-  .catalog-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 480px) {
-  .catalog-list {
-    grid-template-columns: 1fr;
-  }
-}
 @media (max-width: 768px) {
   .container {
     max-width: 390px;
@@ -1808,7 +1889,8 @@ input.invalid {
   .advantages-name {
     letter-spacing: -0.04em;
     color: #818991;
-    padding: 19px 0;
+    padding: 15px 0;
+    flex-shrink: 0;
     border: 1px solid #818991;
     border-radius: 36px;
     text-align: center;
@@ -1927,6 +2009,9 @@ input.invalid {
     padding: 15px 0;
     border-radius: 5px;
     height: auto;
+  }
+  .about-mob {
+    display: block;
   }
   .about-video {
     border-radius: 5px;
@@ -2060,8 +2145,9 @@ input.invalid {
     border-radius: 5px;
     background: #ebebeb;
     font-size: 18px;
+    font-family: "Inter", sans-serif;
     line-height: 133%;
-    padding: 30px 20px;
+    padding: 25px 20px;
     color: #818991;
   }
 }

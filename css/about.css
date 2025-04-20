@@ -23,8 +23,9 @@
 }
 .philosophy-name {
   letter-spacing: -0.04em;
+  flex-shrink: 0;
   color: #818991;
-  padding: 19px 0;
+  padding: 15px 0;
   border: 1px solid #818991;
   border-radius: 36px;
   text-align: center;
@@ -50,7 +51,10 @@
   gap: 10px;
 }
 .philosophy-images img {
-  width: 100%;
+  flex: 1;
+  max-width: 50%;
+  object-fit: cover;
+  height: auto;
 }
 
 .edge {
@@ -59,17 +63,19 @@
 .edge-wrapper {
   display: flex;
   align-items: flex-start;
-  gap: 312px;
+  gap: 311px;
   margin-bottom: 50px;
 }
 .edge-name {
   letter-spacing: -0.04em;
+  flex-shrink: 0;
   color: #818991;
-  padding: 19px 0;
+  padding: 15px 0;
   border: 1px solid #818991;
   border-radius: 36px;
   text-align: center;
   width: 161px;
+  flex-shrink: 0;
 }
 .edge-title {
   font-family: "Helvetica Neue", sans-serif;
@@ -140,8 +146,9 @@
 }
 .numbers-name {
   letter-spacing: -0.04em;
+  flex-shrink: 0;
   color: #818991;
-  padding: 19px 0;
+  padding: 15px 0;
   border: 1px solid #818991;
   border-radius: 36px;
   text-align: center;

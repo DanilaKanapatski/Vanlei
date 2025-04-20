@@ -25,8 +25,9 @@ $back-color: #f7f7f7;
 
 @mixin section-name {
   letter-spacing: -0.04em;
+  flex-shrink: 0;
   color: $desc-color;
-  padding: 19px 0;
+  padding: 15px 0;
   border: 1px solid $desc-color;
   border-radius: 36px;
   text-align: center;
@@ -93,6 +94,10 @@ $back-color: #f7f7f7;
     font-size: 18px;
     line-height: 156%;
     color: $desc-color;
+    
+    //@media screen and (max-width: 1880px){
+    //  margin-left: 430px;
+    //}
   }
 
   &-images {
@@ -101,7 +106,10 @@ $back-color: #f7f7f7;
     gap: 10px;
 
     img {
-      width: 100%;
+      flex: 1; // Равномерно распределяем пространство
+      max-width: 50%; // Не даём каждому изображению быть больше половины
+      object-fit: cover;
+      height: auto;
     }
   }
 }
@@ -114,13 +122,14 @@ $back-color: #f7f7f7;
   &-wrapper {
     display: flex;
     align-items: flex-start;
-    gap: 312px;
+    gap: 311px;
     margin-bottom: 50px;
   }
 
   &-name {
     @include section-name;
     width: 161px;
+    flex-shrink: 0;
   }
 
   &-title {
