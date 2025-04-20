@@ -4,3 +4,4 @@ document.querySelector('.footer-scroll').addEventListener('click', function() {
         behavior: 'smooth' // для плавной прокрутки
     });
 });
+
