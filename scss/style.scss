@@ -25,6 +25,13 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
 @font-face {
   font-family: 'Helvetica Neue'; /* Название шрифта (можете задать любое) */
   src: url('../fonts/HelveticaNeue-Roman.otf') format('opentype'); /* Путь к файлу */
@@ -542,6 +549,10 @@ body {
     font-size: clamp(20px, 2vw, 36px);
     line-height: 98%;
     margin: 35px 0 31px;
+
+    @media screen and (max-width: 1919px) {
+      max-width: 642px;
+    }
   }
 
   &-list {
@@ -571,7 +582,7 @@ body {
         margin: auto auto 0 auto;
 
         @media screen and (max-width: 1919px) {
-          width: 70%;
+          width: 60%;
         }
       }
 

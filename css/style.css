@@ -25,6 +25,13 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
 @font-face {
   font-family: "Helvetica Neue"; /* Название шрифта (можете задать любое) */
   src: url("../fonts/HelveticaNeue-Roman.otf") format("opentype"); /* Путь к файлу */
@@ -465,6 +472,11 @@ body {
   line-height: 98%;
   margin: 35px 0 31px;
 }
+@media screen and (max-width: 1919px) {
+  .region-subtitle {
+    max-width: 642px;
+  }
+}
 .region-list {
   margin-top: 50px;
   display: flex;
@@ -495,7 +507,7 @@ body {
 }
 @media screen and (max-width: 1919px) {
   .region-list li img {
-    width: 70%;
+    width: 60%;
   }
 }
 @media screen and (max-width: 1919px) {
