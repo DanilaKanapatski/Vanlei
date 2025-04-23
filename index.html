@@ -17,8 +17,8 @@
     <script src="js/certificates-slider.js"></script>
     <script defer src="js/scroll.js"></script>
     <script src="js/main-slider.js"></script>
-    <script src="js/cost-form.js"></script>
     <script src='js/defend.js'></script>
+    <script defer src="js/contacts-form.js"></script>
 </head>
 <body>
 <header class="header">
@@ -56,7 +56,51 @@
     </div>
 </header>
 <!--<iframe sandbox="allow-same-origin" src="index.html"></iframe>-->
+<header class="header-mob">
+    <div class="container">
+        <div class="header-top">
+            <img src="assets/header-logomob.svg" alt="Логотип">
+            <button class="burger-btn">
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </button>
+        </div>
+        <div class="header-content">
+            <ul class="header-mob__list">
+                <li>
+                    <a href="index.html">Главная</a>
+                </li>
+                <li>
+                    <a href="#catalog">Каталог</a>
+                </li>
+                <li>
+                    <a href="#about">О компании</a>
+                </li>
+                <li>
+                    <a href="#advantages">Преимущества</a>
+                </li>
+                <li>
+                    <a href="#certificates">Сертификаты</a>
+                </li>
+                <li>
+                    <a href="#stages">Этапы работы</a>
+                </li>
+                <li>
+                    <a href="#vr">VR-тур</a>
+                </li>
+                <li>
+                    <a href="#contacts">Контакты</a>
+                </li>
+            </ul>
 
+            <div class="header-contacts">
+                <a href="tel:+79236188887">+7 923 618 8887</a>
+                <a href="mailto:russmg@yandex.ru">russmg@yandex.ru</a>
+            </div>
+        </div>
+    </div>
+</header>
 <main>
     <section class="main">
         <div class="container">
@@ -71,8 +115,10 @@
             <a class="main-link" href="#catalog">Посмотреть каталог</a>
             <div class="main-slider">
                 <img src="assets/main-1.png" alt="">
-                <img src="assets/main-2.png" alt="">
-                <img src="assets/main-3.png" alt="">
+                <img src="assets/projects-10.png" alt="">
+                <img src="assets/projects-8.png" alt="">
+<!--                <img src="assets/main-2.png" alt="">-->
+<!--                <img src="assets/main-3.png" alt="">-->
                 <img src="assets/main-4.png" alt="">
             </div>
         </div>
@@ -133,9 +179,9 @@
             <img class="separator-mob" src="assets/separator-mob.svg" alt="">
             <ul class="catalog-list">
                 <li class="catalog-item">
-                    <a class="catalog-item__link" href="pages/Granite-Stone-Paint-8k.html">
+                    <a class="catalog-item__link" href="pages/Granite-Paint-8k.html">
                         <img src="assets/catalog-1.png" alt="">
-                        <h3 class="catalog-subtitle">Granite Stone Paint 8K</h3>
+                        <h3 class="catalog-subtitle">Granite Paint 8K</h3>
                         <p class="catalog-desc">Революционная однокомпонентная краска, имитирующее натуральный гранит и
                             предназначенная для длительной эксплуатации (до 20 лет).</p>
                         <ul class="catalog-info">
@@ -381,16 +427,17 @@
                 <!-- Форма подбора цвета -->
                 <form class="color-form" id="colorForm">
                     <div class="form-info">
-                        <input type="text" placeholder="Как вас зовут *" required>
-                        <input type="tel" placeholder="Ваш номер телефона *" required>
-                        <input type="email" placeholder="Ваш email *" required>
-                        <input type="text" placeholder="Сообщение (можете описать необходимый цвет)">
+                        <input type="text" name="fullname" placeholder="Как вас зовут" required pattern="[A-Za-zА-Яа-яЁё\s]{2,30}" title="Только буквы (2-30 символов)">
+                        <input type="tel" name="phone" placeholder="Ваш номер телефона" required
+                               pattern="^\+?[0-9]{10,15}$"
+                               title="Формат: +79998887766 или 79998887766 (10-15 цифр)">
+                        <input type="email" name="email" placeholder="Ваш email">
+                        <input type="text" name="message" placeholder="Сообщение (можете описать необходимый цвет)" maxlength="300">
+                        <!-- Скрытое поле для защиты от ботов -->
+                        <input type="hidden" name="antibot" value="" style="display: none;">
                     </div>
-                    <p class="color-info">Оставляя заявку, я соглашаюсь на обработку персональных данных в соответствии
-                        с
-                        <a target="_blank"
-                           href="https://vanlei.ru/wp-content/uploads/2024/04/%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0-%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8.pdf">политикой
-                            конфиденциальности</a>
+                    <p class="color-info">Оставляя заявку, я соглашаюсь на обработку персональных данных в соответствии с
+                        <a target="_blank" href="https://vanlei.ru/wp-content/uploads/2024/04/%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0-%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8.pdf">политикой конфиденциальности</a>
                     </p>
                     <button type="submit" class="color-btn">Отправить заявку</button>
                 </form>
@@ -488,9 +535,9 @@
                 <span class="about-name">О компании</span>
                 <div class="about-content">
                     <h2 class="about-title">Мы — единственный в России <span>официальный поставщик</span> красок с
-                        мировым именем Wanlei
-                    </h2>
-                    <p class="about-desc">Компания Wanlei — мировой лидер в производстве декоративных красок и покрытий
+                        мировым именем Vanlei
+                    </h2>Сдел
+                    <p class="about-desc">Компания Vanlei — мировой лидер в производстве декоративных красок и покрытий
                         с фактурой
                         натурального гранита, камня и других декоративных эффектов. Основанная в 1991 году в Китае,
                         компания обладает 30-летним опытом в разработке инновационных составов. Производственная база
@@ -617,7 +664,8 @@
     </section>
     <section class="cost" id="cost">
         <div class="container">
-            <img src="assets/color-back.svg" alt="">
+            <img class="cost-imgmob" src="assets/color-backmob.svg" alt="">
+            <img class="cost-img" src="assets/color-back.svg" alt="">
             <div class="cost-content">
                 <h2 class="cost-title">Расчитайте стоимость покраски <span>вашего объекта</span></h2>
                 <p class="cost-desc">Ответьте на несколько вопросов о своей задаче. Наши менеджеры проанализируют
@@ -628,15 +676,16 @@
                     <div class="form-step form-step-1 active">
                         <div class="form-info">
                             <div class="select-wrapper">
-                                <input type="text" class="coating-select" placeholder="Выберите покрытие из списка *"
+                                <input type="text" name="coating" class="coating-select" placeholder="Выберите покрытие из списка *"
                                        readonly required>
+                                <!-- SVG arrow -->
                                 <svg class="select-arrow" width="15" height="9" viewBox="0 0 15 9" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1 1L7.5 8L14 1" stroke="#1E2D3D" stroke-width="1.5" stroke-linecap="round"
                                           stroke-linejoin="round"/>
                                 </svg>
                                 <div class="select-options">
-                                    <div class="option">Granite Stone Paint 8K</div>
+                                    <div class="option" data-value="Granite Paint 8K">Granite Paint 8K</div>
                                     <div class="option">Stone Granite Paint</div>
                                     <div class="option">Stone paint</div>
                                     <div class="option">Italian Spray Paint</div>
@@ -646,9 +695,16 @@
                                     <div class="option">Grafiato paint</div>
                                     <div class="option">Spray Sand Paint</div>
                                 </div>
+                                <div class="error-message coating-error">Выберите покрытие</div>
                             </div>
-                            <input type="text" placeholder="Введите артикул краски">
-                            <input type="text" placeholder="Площадь объекта (м²) *" required>
+                            <div class="input-wrapper">
+                                <input type="text" name="article" placeholder="Введите артикул краски" maxlength="20">
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="text" name="area" placeholder="Площадь объекта (м²) *" required
+                                       pattern="\d+" title="Только цифры">
+                                <div class="error-message area-error">Укажите площадь</div>
+                            </div>
                         </div>
                         <button type="button" class="cost-btn next-btn">Перейти дальше</button>
                     </div>
@@ -656,11 +712,27 @@
                     <!-- Вторая часть формы -->
                     <div class="form-step form-step-2">
                         <div class="form-info">
-                            <input type="text" placeholder="Как вас зовут" required>
-                            <input type="tel" placeholder="Ваш номер телефона" required>
-                            <input type="email" placeholder="Ваш email" required>
-                            <input type="text" placeholder="Сообщение">
+                            <div class="input-wrapper">
+                                <input type="text" name="fullname" placeholder="Как вас зовут" required
+                                       pattern="[A-Za-zА-Яа-яЁё\s]{2,30}">
+                                <div class="error-message fullname-error">Укажите ваше имя (2-30 символов)</div>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="tel" name="phone" placeholder="Ваш номер телефона" required
+                                       pattern="^\+?[0-9]{10,15}$">
+                                <div class="error-message phone-error">Укажите корректный номер телефона</div>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="email" name="email" placeholder="Ваш email">
+                                <div class="error-message email-error">Укажите корректный email</div>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="text" name="message" placeholder="Сообщение" maxlength="300">
+                            </div>
+                            <input type="hidden" name="antibot" value="">
+                            <input type="hidden" name="formType" value="costForm">
                         </div>
+                        <!-- Политика конфиденциальности -->
                         <p class="cost-info">Оставляя заявку, я соглашаюсь на обработку персональных данных в
                             соответствии с
                             <a target="_blank"
@@ -761,8 +833,18 @@
                 <h2 class="certificates-title">Качество нашей продукции подтверждено множеством международных <span>сертификатов качества</span>
                 </h2>
             </div>
-            <img class="separator" src="assets/separator.svg" alt="">
+            <img class="separator" src="assets/separator-1.svg" alt="">
             <img class="separator-mob" src="assets/separator-mob.svg" alt="">
+            <div class="certificates-nav">
+                <div class="counter">
+                    <span class="current-slide">01</span>
+                    <span class="total-slides">/08</span>
+                </div>
+                <div class="certificates-pagination">
+                    <button class="cert-prev-btn"><img src="assets/prev.svg" alt="Предыдущий"></button>
+                    <button class="cert-next-btn"><img src="assets/next.svg" alt="Следующий"></button>
+                </div>
+            </div>
 
             <div class="certificates-slider">
                 <div class="slider-container">
@@ -790,16 +872,6 @@
                     <div class="slide">
                         <img src="assets/certificates-8.png" alt="Сертификат 8">
                     </div>
-                </div>
-            </div>
-            <div class="certificates-nav">
-                <div class="counter">
-                    <span class="current-slide">01</span>
-                    <span class="total-slides">/08</span>
-                </div>
-                <div class="certificates-pagination">
-                    <button class="cert-prev-btn"><img src="assets/prev.svg" alt="Предыдущий"></button>
-                    <button class="cert-next-btn"><img src="assets/next.svg" alt="Следующий"></button>
                 </div>
             </div>
         </div>
@@ -874,23 +946,23 @@
     <section class="contacts" id="contacts">
         <div class="container">
             <div class="contacts-content">
-                <span class="contacts-name">Контакты </span>
+                <span class="contacts-name">Контакты</span>
                 <h2 class="contacts-title">Подберем краску для вашего объекта и рассчитаем стоимость доставки</h2>
-                <p class="contacts-desc">Оставьте контакты и мы свяжемся с вами в течении часа для консультации и ответа
-                    на ваши вопросы</p>
-                <!-- Контактная форма -->
+                <p class="contacts-desc">Оставьте контакты и мы свяжемся с вами в течении часа для консультации и ответа на ваши вопросы</p>
+
                 <form class="contacts-form" id="contactsForm">
                     <div class="form-info">
-                        <input type="text" placeholder="Как вас зовут" required>
-                        <input type="tel" placeholder="Ваш номер телефона" required>
-                        <input type="email" placeholder="Ваш email" required>
-                        <input type="text" placeholder="Сообщение">
+                        <input type="text" name="fullname" placeholder="Как вас зовут" required pattern="[A-Za-zА-Яа-яЁё\s]{2,30}" title="Только буквы (2-30 символов)">
+                        <input type="tel" name="phone" placeholder="Ваш номер телефона" required
+                               pattern="^\+?[0-9]{10,15}$"
+                               title="Формат: +79998887766 или 79998887766 (10-15 цифр)">
+                        <input type="email" name="email" placeholder="Ваш email">
+                        <input type="text" name="message" placeholder="Сообщение" maxlength="300">
+                        <!-- Скрытое поле для защиты от ботов -->
+                        <input type="hidden" name="antibot" value="" style="display: none;">
                     </div>
-                    <p class="contacts-info">Оставляя заявку, я соглашаюсь на обработку персональных данных в
-                        соответствии с
-                        <a target="_blank"
-                           href="https://vanlei.ru/wp-content/uploads/2024/04/%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0-%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8.pdf">политикой
-                            конфиденциальности</a>
+                    <p class="contacts-info">Оставляя заявку, я соглашаюсь на обработку персональных данных в соответствии с
+                        <a target="_blank" href="https://vanlei.ru/wp-content/uploads/2024/04/%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0-%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8.pdf">политикой конфиденциальности</a>
                     </p>
                     <button type="submit" class="contacts-btn">Отправить заявку</button>
                 </form>
@@ -900,9 +972,7 @@
     </section>
     <section class="map">
         <div class="container">
-            <iframe id="yandex-map"
-                    src="https://yandex.ru/map-widget/v1/?um=constructor%3A48e71a74d494bc4bf39fa5e159987b396ee34f69932f09cf6339dbd6b44b68d3&amp;source=constructor"
-                    width="100%" height="720" frameborder="0"></iframe>
+            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Add1b5c9a1315944b9bcb4a9f65e75f4637cf90b2a1111814bd457ba23e9b70cd&amp;source=constructor" width="100%" height="720" frameborder="0"></iframe>
         </div>
     </section>
 </main>
@@ -981,7 +1051,7 @@
                         <div class="footer-nav">
                             <h3>Каталог:</h3>
                             <ul>
-                                <li><a href="pages/Granite-Stone-Paint-8k.html">Granite Stone Paint 8K</a></li>
+                                <li><a href="pages/Granite-Paint-8k.html">Granite Stone Paint 8K</a></li>
                                 <li><a href="pages/Stone-Paint.html">Stone Paint</a></li>
                                 <li><a href="pages/Stone-Granite-Paint.html">Stone Granite Paint</a></li>
                                 <li><a href="pages/Italian-Spray-Paint.html">Italian Spray Paint</a></li>
@@ -1026,10 +1096,7 @@
             <div class="footer-info">
                 <div>
                     <span>©️ 2025 «СМГ ТЕХНОЛОГИИ»</span>
-                    <p>Настоящий сайт носит исключительно информационный характер и не является публичной офертой.
-                        Визуализации, представленные на настоящем сайте, являются ориентировочными. Все права на
-                        размещенные
-                        изображения и информацию принадлежат компании «СМГ ТЕХНОЛОГИИ»</p>
+                    <p>Настоящий сайт носит исключительно информационный характер и не является публичной офертой. Визуализации, представленные на настоящем сайте, являются ориентировочными. Все права на размещенные изображения и информацию принадлежат компании «СМГ ТЕХНОЛОГИИ». Копирование, распространение фото, видео и другой информации с настоящего сайта производится только с разрешения «СМГ ТЕХНОЛОГИИ».</p>
                 </div>
                 <div>
                     <span>ИНН: 4205426037</span>
@@ -1079,7 +1146,7 @@
             <div class="footer-nav">
                 <h3>Каталог:</h3>
                 <ul>
-                    <li><a href="pages/Granite-Stone-Paint-8k.html">Granite Stone Paint 8K</a></li>
+                    <li><a href="pages/Granite-Paint-8k.html">Granite Stone Paint 8K</a></li>
                     <li><a href="pages/Stone-Paint.html">Stone Paint</a></li>
                     <li><a href="pages/Stone-Granite-Paint.html">Stone Granite Paint</a></li>
                     <li><a href="pages/Italian-Spray-Paint.html">Italian Spray Paint</a></li>
@@ -1138,7 +1205,7 @@
         </div>
         <div class="footer-mob__info">
             <span>©️ 2025 «СМГ ТЕХНОЛОГИИ»</span>
-            <p>Настоящий сайт носит исключительно информационный характер и не является публичной офертой. Визуализации, представленные на настоящем сайте, являются ориентировочными. Все права на размещенные изображения и информацию принадлежат компании «СМГ ТЕХНОЛОГИИ»</p>
+            <p>Настоящий сайт носит исключительно информационный характер и не является публичной офертой. Визуализации, представленные на настоящем сайте, являются ориентировочными. Все права на размещенные изображения и информацию принадлежат компании «СМГ ТЕХНОЛОГИИ». Копирование, распространение фото, видео и другой информации с настоящего сайта производится только с разрешения «СМГ ТЕХНОЛОГИИ».</p>
         </div>
         <div class="footer-mob__bottom">
             <a class="footer-mob__politics" href="https://vanlei.ru/wp-content/uploads/2024/04/%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0-%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8.pdf">Политика конфиденциальности </a>

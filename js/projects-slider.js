@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let isMobile = window.innerWidth < 768;
     let autoplayInterval;
 
+    // Переменные для обработки свайпа
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50; // Минимальное расстояние свайпа для срабатывания
+
     // Устанавливаем общее количество слайдов
     totalSlidesEl.textContent = `/${totalSlides < 10 ? '0' + totalSlides : totalSlides}`;
 
@@ -46,6 +51,37 @@ document.addEventListener('DOMContentLoaded', () => {
         updateSlides();
         updateCounter();
         startAutoplay();
+
+        // Добавляем обработчики свайпа для мобильных устройств
+        if (isMobile) {
+            sliderContainer.addEventListener('touchstart', handleTouchStart, {passive: true});
+            sliderContainer.addEventListener('touchend', handleTouchEnd, {passive: true});
+        }
+    }
+
+    // Обработчики свайпа
+    function handleTouchStart(e) {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoplay();
+    }
+
+    function handleTouchEnd(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+        startAutoplay();
+    }
+
+    function handleSwipe() {
+        const difference = touchStartX - touchEndX;
+
+        // Свайп вправо (переход к следующему слайду)
+        if (difference > swipeThreshold) {
+            goToNextSlide();
+        }
+        // Свайп влево (переход к предыдущему слайду)
+        else if (difference < -swipeThreshold) {
+            goToPrevSlide();
+        }
     }
 
     // Обновление счетчика
@@ -124,6 +160,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const newIsMobile = window.innerWidth < 768;
         if (newIsMobile !== isMobile) {
             isMobile = newIsMobile;
+
+            // Добавляем/удаляем обработчики свайпа при изменении размера
+            if (isMobile) {
+                sliderContainer.addEventListener('touchstart', handleTouchStart, {passive: true});
+                sliderContainer.addEventListener('touchend', handleTouchEnd, {passive: true});
+            } else {
+                sliderContainer.removeEventListener('touchstart', handleTouchStart);
+                sliderContainer.removeEventListener('touchend', handleTouchEnd);
+            }
+
             updateSlides();
         }
     });
@@ -131,13 +177,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initSlides();
 });
 
+// Код модального окна остается без изменений
 document.addEventListener('DOMContentLoaded', function() {
     const projectSlides = document.querySelectorAll('.projects .slide');
     const modalOverlay = document.querySelector('.modal-overlay');
     const modalImage = document.querySelector('.modal-image');
     const modalClose = document.querySelector('.modal-close');
 
-    // Получаем размеры самого большого слайда проектов
     const largeProjectSlide = document.querySelector('.projects .slide[data-size="large"]');
     const largeSlideWidth = largeProjectSlide.offsetWidth;
     const largeSlideHeight = largeProjectSlide.offsetHeight;
@@ -146,7 +192,6 @@ document.addEventListener('DOMContentLoaded', function() {
         slide.addEventListener('click', function() {
             const imgSrc = this.querySelector('img').getAttribute('src');
 
-            // Настройки для проектов
             modalImage.setAttribute('src', imgSrc);
             modalImage.style.width = `${largeSlideWidth}px`;
             modalImage.style.height = `${largeSlideHeight}px`;
@@ -159,7 +204,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Общие функции закрытия
     function closeModal() {
         modalOverlay.classList.remove('active');
         document.body.style.overflow = '';

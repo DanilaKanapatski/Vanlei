@@ -5,3 +5,6 @@ document.querySelector('.footer-scroll').addEventListener('click', function() {
     });
 });
 
+document.querySelector('.burger-btn').addEventListener('click', function() {
+    document.querySelector('.header-mob').classList.toggle('active');
+});

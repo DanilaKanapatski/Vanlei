@@ -150,6 +150,10 @@ body {
 
 //header
 
+.header-mob {
+  display: none;
+}
+
 .header {
   width: 100%;
   padding-left: 22px;
@@ -761,17 +765,22 @@ body {
 .color {
   margin-top: 190px;
 
+
+
+
   .container {
+    position: relative;
+    overflow: hidden;
     background: $accent-color;
     border-radius: 15px;
-    position: relative;
+    //position: relative;
     padding: 15px;
-    overflow: hidden;
 
     img {
       position: absolute;
       height: 100%;
-      top: -20px;
+      //max-width: 50%;
+      top: 0;
       right: 0;
     }
   }
@@ -1415,6 +1424,22 @@ input.invalid {
   border-color: red !important;
 }
 
+.invalid + .error-message,
+.coating-error.invalid,
+.area-error.invalid {
+  display: block;
+}
+
+.select-wrapper {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.input-wrapper {
+  position: relative;
+  margin-bottom: 15px;
+}
+
 //stages
 
 .stages {
@@ -1663,6 +1688,10 @@ input.invalid {
 }
 
 .color-imgmob {
+  display: none;
+}
+
+.cost-imgmob {
   display: none;
 }
 
@@ -1947,7 +1976,8 @@ input.invalid {
     p {
       line-height: 129%;
       color: #aaa8a8;
-      max-width: 878px;
+      max-width: 1033px;
+      font-size: 14px;
     }
 
   }
@@ -1977,6 +2007,90 @@ input.invalid {
 
   .header {
     display: none;
+  }
+
+  .header-mob {
+    display: block;
+    padding-bottom: 28px;
+    padding-top: 28px;
+    border-bottom: 1.50px solid #ededed;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: white;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    //padding: 15px 0;
+  }
+
+  .burger-btn {
+    width: 22px;
+    height: 16px;
+    position: relative;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .burger-line {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background-color: #1e2d3d;
+    transition: all 0.3s ease;
+  }
+
+  .header-content {
+    display: none;
+    //max-height: 0;
+    //overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .header-mob__list {
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+
+    li {
+      font-size: 20px;
+      line-height: 90%;
+      letter-spacing: -0.06em;
+      color: #1e2d3d;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #dadadc;
+    }
+  }
+
+  .header-mob.active .header-content {
+    display: block;
+    margin-top: 30px;
+    //max-height: 500px; /* Подберите подходящее значение */
+  }
+
+  /* Превращение в крестик */
+  .header-mob.active .burger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+    width: 25px;
+  }
+
+  .header-mob.active .burger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header-mob.active .burger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+    width: 25px;
   }
 
   .main {
@@ -2229,12 +2343,21 @@ input.invalid {
 
       li {
         max-width: 360px;
+        width: 100%;
         padding: 22px;
         height: 493px;
         background: $back-color;
         border-radius: 15px;
 
         img {
+          width: 100%;
+        }
+
+          &:first-child {
+            width: 100%;
+          }
+
+        &:nth-child(2) {
           width: 100%;
         }
 
@@ -2251,6 +2374,11 @@ input.invalid {
         }
       }
     }
+  }
+
+  .modal-close {
+    top: -60px;
+    right: -10px;
   }
 
   .catalog {
@@ -2309,8 +2437,13 @@ input.invalid {
 
   .color {
     margin-top: 120px;
+    background: #0139b0;
+    position: relative;
+    overflow: hidden;
 
     .container {
+      background: inherit;
+      position: initial;
       border-radius: 0;
       padding: 146px 0 15px;
 
@@ -2319,9 +2452,12 @@ input.invalid {
       }
 
       .color-imgmob {
+        display: block;
+        width: 566px;
+        height: 208px;
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 12px;
+        left: -91px;
       }
     }
 
@@ -2548,19 +2684,32 @@ input.invalid {
   }
 
   .cost {
+    position: relative;
+    overflow: hidden;
+    background: #0139b0;
     margin-top: 120px;
   }
+
+
 
   .cost .container {
     border-radius: 0;
     padding: 182px 0 15px;
-  }
+    background: inherit;
+    position: initial;
 
-  .cost .container img {
-    position: absolute;
-    height: 100%;
-    top: -20px;
-    right: 0;
+    .cost-img {
+      display: none;
+    }
+
+    .cost-imgmob {
+      display: block;
+      width: 566px;
+      height: 208px;
+      position: absolute;
+      top: 12px;
+      left: -91px;
+    }
   }
 
   .cost-content {

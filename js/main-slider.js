@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function startAutoSlide() {
         stopAutoSlide();
-        interval = setInterval(nextSlide, 5000);
+        interval = setInterval(nextSlide, 2000);
     }
 
     function stopAutoSlide() {
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Перезапускаем автопрокрутку после ручного управления
-        setTimeout(startAutoSlide, 5000);
+        setTimeout(startAutoSlide, 2000);
     });
 
     // Возобновляем при возвращении на вкладку

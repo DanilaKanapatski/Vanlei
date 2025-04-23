@@ -7,12 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalSlidesEl = document.querySelector('#certificates .total-slides');
 
     let currentIndex = 0;
-    const totalSlides = slides.length; // 8
+    const totalSlides = slides.length;
     const slidesToShow = 4;
-    const totalSteps = totalSlides - slidesToShow + 1; // 5 переходов (8-4+1)
+    const totalSteps = totalSlides - slidesToShow + 1;
     let slideWidth = slides[0].offsetWidth + 10;
     let autoplayInterval;
     const autoplayDelay = 5000;
+
+    // Переменные для обработки свайпа
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50; // Минимальное расстояние свайпа для срабатывания
 
     // Инициализация
     function initSlider() {
@@ -43,14 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
         sliderContainer.style.transition = 'transform 0.5s ease';
         sliderContainer.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
 
-        // Обновляем счетчик
         currentSlideEl.textContent = currentIndex + 1 < 10 ? `0${currentIndex + 1}` : currentIndex + 1;
 
-        // Никогда не блокируем кнопки полностью
         prevBtn.disabled = false;
         nextBtn.disabled = false;
 
-        // Визуально выделяем, если достигнут конец/начало
         if (currentIndex === 0) {
             prevBtn.classList.add('end-reached');
         } else {
@@ -62,6 +64,41 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             nextBtn.classList.remove('end-reached');
         }
+    }
+
+    // Обработчики свайпа для мобильных устройств
+    sliderContainer.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoplay();
+    }, {passive: true});
+
+    sliderContainer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+        startAutoplay();
+    }, {passive: true});
+
+    function handleSwipe() {
+        const difference = touchStartX - touchEndX;
+
+        // Свайп вправо (показать предыдущий слайд)
+        if (difference > swipeThreshold) {
+            if (currentIndex < totalSteps - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+        }
+        // Свайп влево (показать следующий слайд)
+        else if (difference < -swipeThreshold) {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = totalSteps - 1;
+            }
+        }
+
+        updateSlider();
     }
 
     // Кнопка "Вперед"
@@ -102,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSlider();
 });
 
+// Остальной код с модальным окном остается без изменений
 document.addEventListener('DOMContentLoaded', function() {
     const certSlides = document.querySelectorAll('.certificates .slide');
     const modalOverlay = document.querySelector('.modal-overlay');
@@ -111,8 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
     certSlides.forEach(slide => {
         slide.addEventListener('click', function() {
             const imgSrc = this.querySelector('img').getAttribute('src');
-
-            // Настройки для сертификатов
             modalImage.setAttribute('src', imgSrc);
             modalImage.style.width = 'auto';
             modalImage.style.height = 'auto';
@@ -125,7 +161,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Общие функции закрытия
     function closeModal() {
         modalOverlay.classList.remove('active');
         document.body.style.overflow = '';
@@ -144,6 +179,4 @@ document.addEventListener('DOMContentLoaded', function() {
             closeModal();
         }
     });
-
-    // Функции закрытия не дублируем, они уже есть в projects-modal.js
 });

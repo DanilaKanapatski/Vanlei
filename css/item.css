@@ -10,7 +10,7 @@
   width: 100%;
 }
 .item-title {
-  max-width: 400px;
+  max-width: 473px;
   font-weight: 500;
   font-size: clamp(24px, 3.333vw, 64px);
   line-height: 103%;
