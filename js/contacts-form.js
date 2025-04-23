@@ -1,199 +1,259 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('costForm');
-    if (!form) return;
+    // Инициализация всех форм
+    initCostForm('costForm');
+    initContactForm('contactsForm');
+    initContactForm('colorForm');
 
-    // Элементы первой страницы
-    const coatingSelect = form.querySelector('.coating-select');
-    const coatingError = form.querySelector('.coating-error');
-    const areaInput = form.querySelector('input[name="area"]');
-    const areaError = form.querySelector('.area-error');
-    const nextBtn = form.querySelector('.next-btn');
-    const steps = [form.querySelector('.form-step-1'), form.querySelector('.form-step-2')];
+    // Инициализация формы расчета стоимости
+    function initCostForm(formId) {
+        const form = document.getElementById(formId);
+        if (!form) return;
 
-    // Элементы второй страницы
-    const fullnameInput = form.querySelector('input[name="fullname"]');
-    const fullnameError = form.querySelector('.fullname-error');
-    const phoneInput = form.querySelector('input[name="phone"]');
-    const phoneError = form.querySelector('.phone-error');
-    const emailInput = form.querySelector('input[name="email"]');
-    const emailError = form.querySelector('.email-error');
+        const selectWrapper = form.querySelector('.select-wrapper');
+        const coatingSelect = form.querySelector('.coating-select');
+        const selectOptions = form.querySelectorAll('.option');
+        const nextBtn = form.querySelector('.next-btn');
+        const steps = [form.querySelector('.form-step-1'), form.querySelector('.form-step-2')];
+        const areaInput = form.querySelector('input[name="area"]');
 
-    // Обработчик для выбора покрытия
-    const selectWrapper = form.querySelector('.select-wrapper');
-    const selectOptions = form.querySelectorAll('.option');
-
-    coatingSelect.addEventListener('click', function(e) {
-        e.stopPropagation();
-        selectWrapper.classList.toggle('active');
-    });
-
-    selectOptions.forEach(option => {
-        option.addEventListener('click', function(e) {
-            e.stopPropagation();
-            coatingSelect.value = this.textContent;
-            coatingSelect.dataset.value = this.dataset.value || this.textContent;
-            selectWrapper.classList.remove('active');
-            coatingSelect.classList.remove('invalid');
-            coatingError.classList.remove('invalid');
+        // Перенесено в правильное место - после объявления coatingSelect
+        coatingSelect.addEventListener('focus', function() {
+            this.classList.remove('invalid');
+            removeError(this);
         });
-    });
 
-    document.addEventListener('click', function(e) {
-        if (!selectWrapper.contains(e.target)) {
-            selectWrapper.classList.remove('active');
+        // Остальной код функции остается без изменений
+        // Обработчик клика по полю выбора
+        coatingSelect.addEventListener('click', function(e) {
+            e.stopPropagation();
+            selectWrapper.classList.toggle('active');
+        });
+
+        // Обработчики для вариантов выбора
+        selectOptions.forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.stopPropagation();
+                coatingSelect.value = this.textContent;
+                coatingSelect.dataset.value = this.dataset.value || this.textContent;
+                selectWrapper.classList.remove('active');
+                removeError(coatingSelect);
+            });
+        });
+
+        // Закрытие выпадающего списка при клике вне его
+        document.addEventListener('click', function(e) {
+            if (!selectWrapper.contains(e.target)) {
+                selectWrapper.classList.remove('active');
+            }
+        });
+
+        // Остальной код функции остается без изменений
+        if (areaInput) {
+            areaInput.addEventListener('input', function() {
+                this.value = this.value.replace(/\D/g, '');
+            });
         }
-    });
 
-    // Валидация площади (только цифры)
-    if (areaInput) {
-        areaInput.addEventListener('input', function() {
-            this.value = this.value.replace(/\D/g, '');
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                let isValid = validateStep1(form);
+                if (isValid) {
+                    steps[0].classList.remove('active');
+                    steps[1].classList.add('active');
+                    steps[1].scrollIntoView({ behavior: 'smooth' });
+
+                    // Сбрасываем стили ошибок при успешном переходе
+                    const inputs = steps[0].querySelectorAll('input');
+                    inputs.forEach(input => {
+                        input.classList.remove('invalid');
+                        removeError(input);
+                    });
+                }
+            });
+        }
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (!validateStep1(form) || !validateStep2(form)) return;
+
+            const formData = prepareCostFormData(form);
+            processFormSubmission(formData, form);
         });
     }
 
-    // Обработчик для кнопки "Далее"
-    nextBtn.addEventListener('click', function(e) {
-        e.preventDefault();
+    // Инициализация контактных форм
+    function initContactForm(formId) {
+        const form = document.getElementById(formId);
+        if (!form) return;
 
-        // Сбрасываем предыдущие ошибки
-        resetErrors();
-
-        let isValid = true;
-
-        // Проверка покрытия
-        if (!coatingSelect.value.trim()) {
-            coatingSelect.classList.add('invalid');
-            coatingError.classList.add('invalid');
-            isValid = false;
+        // Валидация телефона
+        const phoneInput = form.querySelector('input[type="tel"]');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function() {
+                this.value = this.value.replace(/[^\d+]/g, '');
+            });
         }
 
-        // Проверка площади
-        if (!areaInput.value.trim()) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (!validateContactForm(form)) return;
+
+            const formData = prepareContactFormData(form, formId);
+            processFormSubmission(formData, form);
+        });
+    }
+
+    // Валидация первого шага (расчет стоимости)
+    function validateStep1(form) {
+        let isValid = true;
+        const coatingSelect = form.querySelector('.coating-select');
+        const areaInput = form.querySelector('input[name="area"]');
+
+        // Валидация выбора покрытия
+        if (!coatingSelect.value) {
+            coatingSelect.classList.add('invalid');
+            showError(coatingSelect, 'Выберите покрытие');
+            isValid = false;
+        } else {
+            coatingSelect.classList.remove('invalid');
+            removeError(coatingSelect);
+        }
+
+        // Валидация площади
+        if (!areaInput.value) {
             areaInput.classList.add('invalid');
-            areaError.textContent = 'Укажите площадь';
-            areaError.classList.add('invalid');
+            showError(areaInput, 'Укажите площадь');
             isValid = false;
         } else if (!/^\d+$/.test(areaInput.value)) {
             areaInput.classList.add('invalid');
-            areaError.textContent = 'Только цифры';
-            areaError.classList.add('invalid');
+            showError(areaInput, 'Только цифры');
             isValid = false;
-        }
-
-        if (isValid) {
-            // Переход к следующему шагу
-            steps[0].classList.remove('active');
-            steps[1].classList.add('active');
-            steps[1].scrollIntoView({ behavior: 'smooth' });
         } else {
-            // Прокрутка к первой ошибке
-            scrollToFirstError();
-        }
-    });
-
-    // Обработчик отправки формы
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        // Сбрасываем предыдущие ошибки
-        resetErrors();
-
-        let isValid = true;
-
-        // Проверка имени
-        if (!fullnameInput.value.trim()) {
-            fullnameInput.classList.add('invalid');
-            fullnameError.textContent = 'Укажите ваше имя';
-            fullnameError.classList.add('invalid');
-            isValid = false;
-        } else if (!/^[A-Za-zА-Яа-яЁё\s]{2,30}$/u.test(fullnameInput.value)) {
-            fullnameInput.classList.add('invalid');
-            fullnameError.textContent = 'Только буквы (2-30 символов)';
-            fullnameError.classList.add('invalid');
-            isValid = false;
-        }
-
-        // Проверка телефона
-        if (!phoneInput.value.trim()) {
-            phoneInput.classList.add('invalid');
-            phoneError.textContent = 'Укажите номер телефона';
-            phoneError.classList.add('invalid');
-            isValid = false;
-        } else if (!/^\+?[0-9]{10,15}$/.test(phoneInput.value)) {
-            phoneInput.classList.add('invalid');
-            phoneError.textContent = 'Неверный формат телефона';
-            phoneError.classList.add('invalid');
-            isValid = false;
-        }
-
-        // Проверка email (если заполнен)
-        if (emailInput.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
-            emailInput.classList.add('invalid');
-            emailError.textContent = 'Неверный формат email';
-            emailError.classList.add('invalid');
-            isValid = false;
+            areaInput.classList.remove('invalid');
+            removeError(areaInput);
         }
 
         if (!isValid) {
-            scrollToFirstError();
-            return;
+            scrollToFirstError(form);
         }
+        return isValid;
+    }
 
-        // Подготовка данных формы
-        const formData = {
+    // Валидация второго шага (расчет стоимости)
+    function validateStep2(form) {
+        const requiredInputs = form.querySelectorAll('.form-step-2 [required]');
+        let isValid = true;
+
+        requiredInputs.forEach(input => {
+            if (!input.value.trim()) {
+                showError(input, 'Заполните это поле');
+                isValid = false;
+            } else if (input.name === 'phone' && !/^\+?[0-9]{10,15}$/.test(input.value)) {
+                showError(input, 'Неверный формат телефона');
+                isValid = false;
+            } else if (input.name === 'email' && input.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
+                showError(input, 'Неверный формат email');
+                isValid = false;
+            }
+        });
+
+        if (!isValid) scrollToFirstError(form);
+        return isValid;
+    }
+
+    // Валидация контактных форм
+    function validateContactForm(form) {
+        const requiredInputs = form.querySelectorAll('[required]');
+        let isValid = true;
+
+        requiredInputs.forEach(input => {
+            if (!input.value.trim()) {
+                showError(input, 'Заполните это поле');
+                isValid = false;
+            } else if (input.name === 'fullname' && !/^[A-Za-zА-Яа-яЁё\s]{2,30}$/u.test(input.value)) {
+                showError(input, 'Только буквы (2-30 символов)');
+                isValid = false;
+            } else if (input.name === 'phone' && !/^\+?[0-9]{10,15}$/.test(input.value)) {
+                showError(input, 'Неверный формат телефона');
+                isValid = false;
+            }
+        });
+
+        if (!isValid) scrollToFirstError(form);
+        return isValid;
+    }
+
+    // Подготовка данных формы расчета
+    function prepareCostFormData(form) {
+        return {
             formType: 'costForm',
-            coating: coatingSelect.value,
-            coatingValue: coatingSelect.dataset.value,
+            coating: form.querySelector('.coating-select').value,
+            coatingValue: form.querySelector('.coating-select').dataset.value,
             article: form.querySelector('[name="article"]')?.value.trim() || '',
-            area: areaInput.value + ' м²',
-            fullname: fullnameInput.value.trim(),
-            phone: formatPhone(phoneInput.value.trim()),
-            email: emailInput.value.trim() || '',
+            area: form.querySelector('[name="area"]').value + ' м²',
+            fullname: form.querySelector('[name="fullname"]').value.trim(),
+            phone: formatPhone(form.querySelector('[name="phone"]').value.trim()),
+            email: form.querySelector('[name="email"]')?.value.trim() || '',
             message: form.querySelector('[name="message"]')?.value.trim() || '',
             antibot: form.querySelector('[name="antibot"]').value,
             pageUrl: window.location.href
         };
-
-        // Отправка формы
-        processFormSubmission(formData, form);
-    });
-
-    // Сброс ошибок
-    function resetErrors() {
-        coatingSelect.classList.remove('invalid');
-        coatingError.classList.remove('invalid');
-        areaInput.classList.remove('invalid');
-        areaError.classList.remove('invalid');
-        fullnameInput.classList.remove('invalid');
-        fullnameError.classList.remove('invalid');
-        phoneInput.classList.remove('invalid');
-        phoneError.classList.remove('invalid');
-        emailInput.classList.remove('invalid');
-        emailError.classList.remove('invalid');
     }
 
-    // Прокрутка к первой ошибке
-    function scrollToFirstError() {
+    // Подготовка данных контактных форм
+    function prepareContactFormData(form, formType) {
+        return {
+            formType: formType,
+            fullname: form.querySelector('[name="fullname"]').value.trim(),
+            phone: formatPhone(form.querySelector('[name="phone"]').value.trim()),
+            email: form.querySelector('[name="email"]')?.value.trim() || '',
+            message: form.querySelector('[name="message"]')?.value.trim() || '',
+            antibot: form.querySelector('[name="antibot"]').value,
+            pageUrl: window.location.href
+        };
+    }
+
+    // Общие функции
+    function formatPhone(phone) {
+        phone = phone.replace(/\D/g, '');
+        return phone.startsWith('8') ? '+7' + phone.slice(1) : phone;
+    }
+
+    function showError(input, message) {
+        removeError(input);
+        input.classList.add('invalid');
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'error-message';
+        errorMsg.textContent = message;
+        input.parentNode.insertBefore(errorMsg, input.nextSibling);
+    }
+
+    function removeError(input) {
+        input.classList.remove('invalid');
+        const errorMsg = input.nextElementSibling;
+        if (errorMsg && errorMsg.classList.contains('error-message')) {
+            errorMsg.remove();
+        }
+    }
+
+    function scrollToFirstError(form) {
         const firstError = form.querySelector('.invalid');
         if (firstError) {
             firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
 
-    // Форматирование телефона
-    function formatPhone(phone) {
-        phone = phone.replace(/\D/g, '');
-        return phone.startsWith('8') ? '+7' + phone.slice(1) : phone;
+    function isLocal() {
+        return ['localhost', '127.0.0.1'].includes(window.location.hostname);
     }
 
-    // Обработчик отправки формы на сервер
     function processFormSubmission(formData, form) {
         if (isLocal()) {
             console.log('Form data:', formData);
-            alert('Локальная отправка:\n' + JSON.stringify(formData, null, 2));
+            // Вместо alert вызываем showSuccess
+            showSuccess(form, formData.formType);
             form.reset();
-            steps[0].classList.add('active');
-            steps[1].classList.remove('active');
             return;
         }
 
@@ -212,48 +272,45 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(data => {
                 if (data.success) {
-                    alert('Спасибо! Ваша заявка отправлена.');
+                    showSuccess(form, formData.formType);
                     form.reset();
-                    steps[0].classList.add('active');
-                    steps[1].classList.remove('active');
+                    if (formData.formType === 'costForm') {
+                        form.querySelector('.form-step-1').classList.add('active');
+                        form.querySelector('.form-step-2').classList.remove('active');
+                    }
                 } else {
-                    alert(data.message || 'Ошибка отправки');
+                    showError(null, data.message || 'Ошибка отправки');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Ошибка соединения');
+                showError(null, 'Ошибка соединения');
             });
     }
 
-    // Проверка локального окружения
-    function isLocal() {
-        return ['localhost', '127.0.0.1'].includes(window.location.hostname);
+    function showSuccess(form, formType) {
+        const modalBackdrop = document.querySelector('.modal-backdrop');
+        // const modalMessage = document.querySelector('.modal-message');
+        //
+        // const messages = {
+        //     'costForm': 'Ваш расчет стоимости отправлен',
+        //     'contactsForm': 'Ваша заявка отправлена',
+        //     'colorForm': 'Ваш запрос цвета отправлен'
+        // };
+        //
+        // modalMessage.textContent = messages[formType] || 'Ваши данные отправлены';
+        modalBackdrop.classList.add('active');
+
+        // Закрытие по клику на крестик
+        document.querySelector('.close-modal').addEventListener('click', () => {
+            modalBackdrop.classList.remove('active');
+        });
+
+        // Закрытие по клику вне модального окна
+        modalBackdrop.addEventListener('click', (e) => {
+            if (e.target === modalBackdrop) {
+                modalBackdrop.classList.remove('active');
+            }
+        });
     }
-
-    // Обработчики для сброса ошибок при взаимодействии
-    coatingSelect.addEventListener('focus', function() {
-        this.classList.remove('invalid');
-        coatingError.classList.remove('invalid');
-    });
-
-    areaInput.addEventListener('focus', function() {
-        this.classList.remove('invalid');
-        areaError.classList.remove('invalid');
-    });
-
-    fullnameInput.addEventListener('focus', function() {
-        this.classList.remove('invalid');
-        fullnameError.classList.remove('invalid');
-    });
-
-    phoneInput.addEventListener('focus', function() {
-        this.classList.remove('invalid');
-        phoneError.classList.remove('invalid');
-    });
-
-    emailInput.addEventListener('focus', function() {
-        this.classList.remove('invalid');
-        emailError.classList.remove('invalid');
-    });
 });

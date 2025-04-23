@@ -80,6 +80,112 @@ body {
   padding: 0 22px;
 }
 
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(1px);
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-message {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 117%;
+  text-align: center;
+  color: #818991;
+  margin-top: 16px;
+}
+@media screen and (max-width: 768px) {
+  .modal-message {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+    color: #818991;
+    margin-top: 18px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .modal-img {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+.success-modal {
+  border-radius: 12px;
+  width: 534px;
+  height: 278px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+}
+@media screen and (max-width: 768px) {
+  .success-modal {
+    border-radius: 5px;
+    width: 360px;
+    height: 228px;
+  }
+}
+.success-modal h2 {
+  margin-top: 35px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 117%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #0642c1;
+}
+@media screen and (max-width: 768px) {
+  .success-modal h2 {
+    margin-top: 25px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 112%;
+    letter-spacing: -0.02em;
+    color: #0642c1;
+  }
+}
+
+.close-modal {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+@media screen and (max-width: 768px) {
+  .close-modal {
+    top: 17px;
+    right: 17px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
 .header-mob {
   display: none;
 }
@@ -1989,6 +2095,8 @@ input.invalid {
   .header-mob.active .header-content {
     display: block;
     margin-top: 30px;
+    padding-top: 16px;
+    border-top: 1px solid #dadadc;
   }
   /* Превращение в крестик */
   .header-mob.active .burger-line:nth-child(1) {
@@ -2001,6 +2109,22 @@ input.invalid {
   .header-mob.active .burger-line:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
     width: 25px;
+  }
+  .header-contacts {
+    margin-top: 196px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .header-contacts a {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: -0.06em;
+    color: #1e2d3d;
+  }
+  .header-contacts a:nth-child(2) {
+    color: #0139b0;
   }
   .main {
     padding: 137px 0 0 0;
@@ -2373,7 +2497,7 @@ input.invalid {
     gap: 25px;
   }
   .projects-title {
-    max-width: 307px;
+    max-width: 350px;
     line-height: 112%;
   }
   .projects-nav {

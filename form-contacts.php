@@ -5,7 +5,7 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
 // Логирование для отладки
-file_put_contents('form_log.txt', date('[Y-m-d H:i:s]') . " Request: " . file_get_contents('php://input') . PHP_EOL, FILE_APPEND);
+file_put_contents('form_log.txt', date('[Y-m-d H:i:s]') . PHP_EOL . file_get_contents('php://input') . PHP_EOL . PHP_EOL, FILE_APPEND);
 
 // Проверка на бота
 if (!empty($_POST['antibot'])) {
@@ -13,23 +13,26 @@ if (!empty($_POST['antibot'])) {
     exit;
 }
 
-// Получение данных
+// Локальная разработка - эмуляция
+if ($_SERVER['HTTP_HOST'] === 'localhost' || $_SERVER['HTTP_HOST'] === '127.0.0.1') {
+    echo json_encode(['success' => true, 'message' => 'Локальная разработка - письмо не отправлено']);
+    exit;
+}
+
+require_once 'phpmailer/PHPMailerAutoload.php';
+
 $data = json_decode(file_get_contents('php://input'), true);
 
 // Валидация данных
 $errors = [];
 
 // Общие проверки для всех форм
-if (empty($data['fullname']) {
-    $errors[] = 'Укажите ваше имя';
-} elseif (!preg_match('/^[A-Za-zА-Яа-яЁё\s]{2,30}$/u', $data['fullname'])) {
-    $errors[] = 'Некорректное имя (только буквы, 2-30 символов)';
+if (empty($data['fullname']) || !preg_match('/^[A-Za-zА-Яа-яЁё\s]{2,30}$/u', $data['fullname'])) {
+    $errors[] = 'Некорректное имя';
 }
 
-if (empty($data['phone'])) {
-    $errors[] = 'Укажите номер телефона';
-} elseif (!preg_match('/^\+?[0-9]{10,15}$/', $data['phone'])) {
-    $errors[] = 'Некорректный номер телефона';
+if (empty($data['phone']) || !preg_match('/^\+?[0-9]{10,15}$/', $data['phone'])) {
+    $errors[] = 'Некорректный телефон';
 }
 
 if (!empty($data['email']) && !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
@@ -49,7 +52,7 @@ if ($data['formType'] === 'costForm') {
     }
 }
 
-// Проверка сообщения
+// Проверка сообщения для всех форм
 if (!empty($data['message']) && strlen($data['message']) > 300) {
     $errors[] = 'Сообщение слишком длинное';
 }
@@ -59,26 +62,18 @@ if (!empty($errors)) {
     exit;
 }
 
-// Локальная разработка - эмуляция
-if ($_SERVER['HTTP_HOST'] === 'localhost' || $_SERVER['HTTP_HOST'] === '127.0.0.1') {
-    echo json_encode(['success' => true, 'message' => 'Локальная разработка - письмо не отправлено']);
-    exit;
-}
-
 // Настройка PHPMailer
-require_once 'phpmailer/PHPMailerAutoload.php';
-
 $mail = new PHPMailer;
 $mail->CharSet = 'utf-8';
 $mail->isSMTP();
 $mail->Host = 'smtp.mail.ru';
 $mail->SMTPAuth = true;
-$mail->Username = 'your_email@mail.ru';
-$mail->Password = 'your_password';
+$mail->Username = 'danila_konopatskiy@mail.ru';
+$mail->Password = 'JKSg7gKrb5KnyLLq5L1f';
 $mail->SMTPSecure = 'ssl';
 $mail->Port = 465;
-$mail->setFrom('your_email@mail.ru', 'Vanlei');
-$mail->addAddress('recipient@mail.com');
+$mail->setFrom('danila_konopatskiy@mail.ru', 'Vanlei.ru');
+$mail->addAddress('danilakonv@gmail.com');
 
 $mail->isHTML(true);
 
@@ -119,7 +114,7 @@ try {
         echo json_encode(['success' => false, 'message' => 'Ошибка отправки письма: ' . $mail->ErrorInfo]);
     }
 } catch (phpmailerException $e) {
-    echo json_encode(['success' => false, 'message' => 'Ошибка: ' . $mail->ErrorInfo]);
+    echo json_encode(['success' => false, 'message' => 'Ошибка: ' . $e->getMessage()]);
 }
 
 $mail->smtpClose();

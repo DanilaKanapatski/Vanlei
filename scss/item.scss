@@ -269,7 +269,34 @@ $back-color: #f7f7f7;
     color: #818991;
     padding-left: 473px;
     gap: 70px;
+
+    // Стили для мобильной версии
+    @media (max-width: 767px) {
+      margin-top: 45px;
+      padding-left: 0;
+      width: 100%;
+      max-width: 360px; // Ширина контейнера
+      overflow-x: auto; // Включаем горизонтальный скролл
+      -webkit-overflow-scrolling: touch; // Плавный скролл на iOS
+      scrollbar-width: none; // Скрываем скроллбар в Firefox
+      &::-webkit-scrollbar {
+        display: none; // Скрываем скроллбар в Chrome/Safari
+      }
+
+      // Стили для элементов списка в мобильной версии
+      li {
+        flex: 0 0 auto; // Запрещаем сжатие элементов
+        width: auto; // Автоматическая ширина
+        margin-right: 20px; // Расстояние между элементами 20px
+        font-size: 14px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
   }
+
+
 }
 
 .modal-overlay {
@@ -549,7 +576,7 @@ $back-color: #f7f7f7;
   }
 
   .item {
-    padding-top: 20px;
+    padding-top: 85px;
 
     img {
       width: 100%;
@@ -634,7 +661,7 @@ $back-color: #f7f7f7;
     &-list {
       margin-top: 45px;
       padding-left: 0;
-      gap: 20px;
+      gap: 0;
     }
   }
 
@@ -643,7 +670,7 @@ $back-color: #f7f7f7;
     flex-wrap: wrap;
     gap: 28px;
 
-    li {
+    ul li {
       padding: 22px ;
       height: 382px;
       width: 100%;
@@ -698,7 +725,7 @@ $back-color: #f7f7f7;
 
   .characteristics-list li.active {
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
     color: #0139b0;
     position: relative;
@@ -708,7 +735,7 @@ $back-color: #f7f7f7;
     content: "";
     position: absolute;
     width: 100%;
-    height: 4px;
+    height: 3px;
     border-radius: 5px;
     background: #0139B0;
     bottom: -20px;
@@ -763,11 +790,13 @@ $back-color: #f7f7f7;
       margin-top: 28px;
       flex-wrap: wrap;
       gap: 28px;
+      margin-bottom: 120px;
     }
 
     &-item {
       height: 734px;
       max-width: 100%;
+      width: 100%;
       padding: 10px 22px 22px 22px;
     }
   }
